@@ -14,11 +14,11 @@ return(
         <Stack.Screen 
         name="TelaCadastro" 
         component={TelaCadastro}
-        options={{headerShown:false}}/>
+        options={{headerShown:false}} />
       <Stack.Screen 
         name="TelaEsqueceu" 
         component={TelaEsqueceu}
-        options={{headerShown:false}}
+        ///options={{headerShown:false}}
         />
     </Stack.Navigator>
 ) 
