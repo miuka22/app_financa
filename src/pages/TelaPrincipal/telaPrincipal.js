@@ -1,9 +1,9 @@
 import {View,Text} from 'react-native'
-function TelaEsqueceu() {
+function TelaPrincipal() {
   return (
     <View>
     
     </View>
   );
 }
-export default TelaEsqueceu;
+export default TelaPrincipal;

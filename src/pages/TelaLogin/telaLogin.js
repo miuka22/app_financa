@@ -14,14 +14,14 @@ function TelaLogin({navigation}) {
     <View style={styles.conteinerForm}>
         <View style={styles.TextInput} > 
             <TextInput
-                style={styles.textForm}
                 placeholderTextColor={'#000000'}
+                style={styles.textForm}
                 placeholder="Email ou nome de usuario"
                 onChange={text=>
                 setEmail(text)}/>
             <TextInput
-                style={styles.textForm}
                 placeholderTextColor={'#000000'}
+                style={styles.textForm}
                 placeholder="Senha"
                 onChange={text=>
                 setSenha(text)}/>
