@@ -15,25 +15,30 @@ function TelaReceita({navigation}) {
     return(
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
-                <View style={styles.perfil}>
-                    <Image
-                        source={require('../../../assets/iconPerfil.png')}
-                        style={styles.iconPerfil}
-                    ></Image>
+                <View style={styles.novaReceita}>
+                    
                     <Text style={styles.txt24sb}>
-                        Olá, Emily
+                        Nova Receita 
                     </Text>
                 </View>
-                <View style={styles.saldo}>
+                <View style={styles.valor}>
                     <Text style={styles.txt25bk}>
-                      Saldo em conta
+                      Valor
                     </Text>
                     <Text style={styles.txt28sb}>
-                      R$: 205,11
+                      R$: 0,00
                     </Text>
+                    <Image
+                        source={require('../../../assets/lapis.png')}
+                        style={styles.iconlapis}
+                        ></Image>
                 </View>
             </View>
-            <View style={styles.barraInferior}>
+            <View style={styles.formInput}>
+                </View>            
+                
+                
+                <View style={styles.barraInferior}>
                 <Pressable onPress={()=>navigation.navigate('TelaPrincipal')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/homeOff.png')}
@@ -41,9 +46,9 @@ function TelaReceita({navigation}) {
                     />
                     <Text style={styles.txt12r}>Principal</Text>
                 </Pressable>
-                <Pressable style={styles.botaoNav}>
+                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
                     <Image
-                        source={require('../../../assets/receitaOn.png')}
+                        source={require('../../../assets/receitaOff.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12b}>Receita</Text>
@@ -61,43 +66,28 @@ function TelaReceita({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    botaoNav: {
-        alignItems: 'center',
-        paddingVertical: 16,
-        width: 60,
-    },
-    iconInferior:{
-        height: 28,
-        width: 28,
-    },
-    barraInferior:{
-        alignItems: 'center',
-        backgroundColor: '#7B68EE',
-        height: 82,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-    },
     barraSuperior:{
         backgroundColor: '#7B68EE',
-        height: 200,
+        height: 160,
     },
-    perfil:{
-        paddingHorizontal: 40,
-        top: 50,
+    novaReceita:{
+        paddingHorizontal: 20,
+        top: 20,
         flexDirection: 'row',
+        
     },
-    saldo:{
-        //backgroundColor: '#505050',
-        height: 100,
-        paddingHorizontal:40,
-        top:75
+    valor:{
+        height: 50,
+        paddingHorizontal:30,
+        top:30,
     },
     txt25bk:{
         color: '#FFFFFF',
         fontSize: 25,
-        fontFamily: 'SourceSansProBlack',
+        fontFamily: 'SourceSansProBold',
+        alignItems: 'flex-end'
         //backgroundColor: '#101010',
-        alignItems: 'baseline'
+        ///alignItems: 'baseline'
     },
     txt12b:{
         color: '#FFFFFF',
@@ -107,15 +97,17 @@ const styles = StyleSheet.create({
     },
     txt24sb:{
         color: '#FFFFFF',
-        fontSize: 24,
+        fontSize: 35,
         fontFamily: 'SourceSansProSemiBold',
-        paddingHorizontal: 10,
+        alignItems: 'center',
+        
     },
     txt28sb:{
         color: '#ffffff',
         fontSize: 28,
         fontFamily: 'SourceSansProSemiBold',
-        paddingHorizontal:30
+        ///paddingHorizontal:30
+        
     },
     txt12r:{
         color: '#FFFFFF',
@@ -123,13 +115,38 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSansProRegular',
         paddingTop: 6,
     },
-    iconPerfil:{
-        height: 30,
-        width: 30,
+    iconlapis:{
+        height: 25,
+        width: 25,
+        ///paddingHorizontal:20,
+        flexDirection:'row',
+        justifyContent: 'flex-end',
+        left:300,
+        top:35,
+        position: 'absolute',
+        
+        
+        
     },
     fundo:{
         flex: 1,
         justifyContent: 'space-between',
+    },
+    botaoNav: {
+        alignItems: 'center',
+        paddingVertical: 16,
+        width: 60,
+    },
+    iconInferior:{
+        height: 27,
+        width: 27,
+    },
+    barraInferior:{
+        alignItems: 'center',
+        backgroundColor: '#7B68EE',
+        height: 65,
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
     },
 })
 

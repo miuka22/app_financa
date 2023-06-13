@@ -48,14 +48,14 @@ function TelaPrincipal({navigation}) {
                 </Pressable>
                 <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
                     <Image
-                        source={require('../../../assets/receitaOff.png')}
+                        source={require('../../../assets/receitaOn.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12r}>Receita</Text>
                 </Pressable>
                 <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
                     <Image
-                        source={require('../../../assets/despesaOff.png')}
+                        source={require('../../../assets/despesaOn.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12r}>Despesa</Text>
@@ -66,22 +66,6 @@ function TelaPrincipal({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    botaoNav: {
-        alignItems: 'center',
-        paddingVertical: 16,
-        width: 60,
-    },
-    iconInferior:{
-        height: 28,
-        width: 28,
-    },
-    barraInferior:{
-        alignItems: 'center',
-        backgroundColor: '#7B68EE',
-        height: 82,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-    },
     barraSuperior:{
         backgroundColor: '#7B68EE',
         height: 200,
@@ -145,6 +129,22 @@ const styles = StyleSheet.create({
     fundo:{
         flex: 1,
         justifyContent: 'space-between',
+    },
+    botaoNav: {
+        alignItems: 'center',
+        paddingVertical: 16,
+        width: 60,
+    },
+    iconInferior:{
+        height: 25,
+        width: 25,
+    },
+    barraInferior:{
+        alignItems: 'center',
+        backgroundColor: '#7B68EE',
+        height: 80,
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
     },
 })
 
