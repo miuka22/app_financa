@@ -34,26 +34,26 @@ function TelaReceita({navigation}) {
                 </View>
             </View>
             <View style={styles.barraInferior}>
+                <Pressable onPress={()=>navigation.navigate('TelaPrincipal')} style={styles.botaoNav}>
+                    <Image
+                        source={require('../../../assets/homeOff.png')}
+                        style={styles.iconInferior}
+                    />
+                    <Text style={styles.txt12r}>Principal</Text>
+                </Pressable>
                 <Pressable style={styles.botaoNav}>
                     <Image
-                        source={require('../../../assets/homeOn.png')}
+                        source={require('../../../assets/receitaOn.png')}
                         style={styles.iconInferior}
                     />
-                    <Text style={styles.txt12b}>Principal</Text>
-                </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/receitaOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12r}>Receita</Text>
+                    <Text style={styles.txt12b}>Receita</Text>
                 </Pressable>
                 <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/despesaOff.png')}
                         style={styles.iconInferior}
                     />
-                    <Text style={styles.txt12r}>Despesa</Text>
+                    <Text style={styles.txt12b}>Despesa</Text>
                 </Pressable>
             </View>
         </View>

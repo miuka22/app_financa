@@ -15,15 +15,20 @@ function TelaPrincipal({navigation}) {
     return(
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
-                <View style={styles.perfil}>
-                    <Image
-                        source={require('../../../assets/iconPerfil.png')}
-                        style={styles.iconPerfil}
-                    ></Image>
-                    <Text style={styles.txt24sb}>
-                        Olá, Emily
-                    </Text>
-                </View>
+                <View style={styles.faixaUm}>
+                    <View style={styles.menu}>
+
+                    </View>
+                        </View>
+                    <View style={styles.perfil}>
+                        <Image
+                            source={require('../../../assets/iconPerfil.png')}
+                            style={styles.iconPerfil}
+                            ></Image>
+                        <Text style={styles.txt24sb}>
+                            Olá, Emily
+                        </Text>
+                    </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
                       Saldo em conta
@@ -41,14 +46,14 @@ function TelaPrincipal({navigation}) {
                     />
                     <Text style={styles.txt12b}>Principal</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('')} style={styles.botaoNav}>
+                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/receitaOff.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12r}>Receita</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('')} style={styles.botaoNav}>
+                <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/despesaOff.png')}
                         style={styles.iconInferior}
@@ -81,9 +86,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#7B68EE',
         height: 200,
     },
-    perfil:{
-        paddingHorizontal: 40,
+    faixaUm: {
         top: 50,
+        paddingHorizontal: 40,
+        alignItems: 'flex-end',
+    },
+    menu: {
+        height: 20,
+        width: 30,
+        backgroundColor: '#FFFFFF'
+    },
+    perfil:{
+        top: 50,
+        paddingHorizontal: 40,
         flexDirection: 'row',
     },
     saldo:{
