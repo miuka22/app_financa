@@ -5,7 +5,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-<StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true} />
+<StatusBar barStyle="light-content" backgroundColor='#7B68EE' hidden={false}/>
 
       <Route/>
     </NavigationContainer>
