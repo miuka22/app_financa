@@ -94,10 +94,10 @@ btVolta:{
 btEnvia:{
     width: 150,
     height: 40,
-    borderRadius:11,
+    ///borderRadius:11,
     justifyContent:'center',
     alignItems:'center',
-    top:50
+   
 
 },
 EnviaEmail:{
@@ -120,7 +120,8 @@ textInfor:{
     color:'#ffffff',
     fontSize:17
 },
-Input:{width: 300,
+Input:{
+    width: 300,
     height: 50,
     fontSize: 16,
     backgroundColor: '#BAB2ED',
