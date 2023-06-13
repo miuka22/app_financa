@@ -1,17 +1,19 @@
-import { Text, View, Image, StyleSheet } from "react-native"
+import { Text, View, Image, StyleSheet, Pressable } from "react-native"
 import { useFonts } from 'expo-font'
 
 function TelaPrincipal({navigation}) {
     const [loaded] = useFonts ({
       SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
-      SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf')
+      SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
+      SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
+      SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
     if(!loaded){
       return null
     }
 
     return(
-        <View>
+        <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
                 <View style={styles.perfil}>
                     <Image
@@ -30,13 +32,50 @@ function TelaPrincipal({navigation}) {
                       R$: 205,11
                     </Text>
                 </View>
-
+            </View>
+            <View style={styles.barraInferior}>
+                <Pressable style={styles.botaoNav}>
+                    <Image
+                        source={require('../../../assets/homeOn.png')}
+                        style={styles.iconInferior}
+                    />
+                    <Text style={styles.txt12b}>Principal</Text>
+                </Pressable>
+                <Pressable style={styles.botaoNav}>
+                    <Image
+                        source={require('../../../assets/receitaOff.png')}
+                        style={styles.iconInferior}
+                    />
+                    <Text style={styles.txt12r}>Receita</Text>
+                </Pressable>
+                <Pressable style={styles.botaoNav}>
+                    <Image
+                        source={require('../../../assets/despesaOff.png')}
+                        style={styles.iconInferior}
+                    />
+                    <Text style={styles.txt12r}>Despesa</Text>
+                </Pressable>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    botaoNav: {
+        alignItems: 'center',
+        paddingVertical: 16,
+    },
+    iconInferior:{
+        height: 28,
+        width: 28,
+    },
+    barraInferior:{
+        alignItems: 'center',
+        backgroundColor: '#7B68EE',
+        height: 82,
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+    },
     barraSuperior:{
         backgroundColor: '#7B68EE',
         height: 200,
@@ -59,6 +98,12 @@ const styles = StyleSheet.create({
         //backgroundColor: '#101010',
         alignItems: 'baseline'
     },
+    txt12b:{
+        color: '#FFFFFF',
+        fontSize: 12,
+        fontFamily: 'SourceSansProBold',
+        paddingTop: 6,
+    },
     txt24sb:{
         color: '#FFFFFF',
         fontSize: 24,
@@ -71,9 +116,19 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSansProSemiBold',
         paddingHorizontal:30
     },
+    txt12r:{
+        color: '#FFFFFF',
+        fontSize: 12,
+        fontFamily: 'SourceSansProRegular',
+        paddingTop: 6,
+    },
     iconPerfil:{
         height: 30,
         width: 30,
+    },
+    fundo:{
+        flex: 1,
+        justifyContent: 'space-between',
     },
 })
 

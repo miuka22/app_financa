@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 function rota(){
 
 return(
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='TleaPrincipal'>
         <Stack.Screen 
         name="TelaLogin" 
         component={Telalogin}
@@ -24,7 +24,8 @@ return(
         <Stack.Screen         
         name="TelaPrincipal"
         component={TelaPrincipal}
-/>
+        options={{headerShown:false}}
+        />
        
           
         
