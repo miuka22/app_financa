@@ -107,13 +107,13 @@ Entrar:{
     color:'#7B68EE'
 },
 criarConta:{
-    width: 200,
+    width: 150,
     height: 50,
     textAlign: 'center',
     marginVertical:12,
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: 16,
-    //lineHeight: 20,
+    lineHeight: 20,
 }
 })

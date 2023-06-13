@@ -24,7 +24,7 @@ return(
         <Stack.Screen         
         name="TelaPrincipal"
         component={TelaPrincipal}
-        options={{headerShown:false}}
+        ///options={{headerShown:false}}
         />
        
           
