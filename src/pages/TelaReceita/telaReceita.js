@@ -1,7 +1,7 @@
 import { Text, View, Image, StyleSheet, Pressable } from "react-native"
 import { useFonts } from 'expo-font'
 
-function TelaPrincipal({navigation}) {
+function TelaReceita({navigation}) {
     const [loaded] = useFonts ({
       SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
       SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
@@ -41,14 +41,14 @@ function TelaPrincipal({navigation}) {
                     />
                     <Text style={styles.txt12b}>Principal</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('')} style={styles.botaoNav}>
+                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/receitaOff.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12r}>Receita</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('')} style={styles.botaoNav}>
+                <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/despesaOff.png')}
                         style={styles.iconInferior}
@@ -133,4 +133,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default TelaPrincipal;
+export default TelaReceita;
