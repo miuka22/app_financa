@@ -1,20 +1,30 @@
-import { Text, View, Image, StyleSheet, Pressable } from "react-native"
+import { View, Text, StyleSheet } from "react-native" 
 import { useFonts } from 'expo-font'
 
-function TelaReceita({navigation}) {
-    const [loaded] = useFonts ({
-      SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
-      SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
-      SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
-      SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
-    })
-    if(!loaded){
-      return null
-    }
 
+function TelaReceita() {
+    const [loaded] = useFonts ({
+        SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
+        SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
+        SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
+        SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
+      })
+      if(!loaded){
+        return null
+      }
     return(
+        
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
+
+                <View style={styles.perfil}>
+                    
+                    <Text style={styles.txt24sb}>
+                        Nova Receitas
+                    </Text>
+                </View>
+                <View style={styles.title}>
+
                 <View style={styles.novaReceita}>
                     
                     <Text style={styles.txt24sb}>
@@ -33,6 +43,12 @@ function TelaReceita({navigation}) {
                         style={styles.iconlapis}
                         ></Image>
                 </View>
+
+                </View>
+
+        </View>
+            <View style={styles.barraInferior}>
+
             </View>
             <View style={styles.formInput}>
                 </View>            
@@ -46,9 +62,9 @@ function TelaReceita({navigation}) {
                     />
                     <Text style={styles.txt12r}>Principal</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
+                <Pressable style={styles.botaoNav}>
                     <Image
-                        source={require('../../../assets/receitaOff.png')}
+                        source={require('../../../assets/receitaOn.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12b}>Receita</Text>
@@ -65,11 +81,28 @@ function TelaReceita({navigation}) {
     )
 }
 
+
 const styles = StyleSheet.create({
     barraSuperior:{
         backgroundColor: '#7B68EE',
         height: 160,
     },
+    title:{
+        height:100,
+        paddingHorizontal:40,
+        top:75
+
+    },
+
+    txt24sb:{
+        alignItems:'center',
+        justifyContent:'center',
+        paddingHorizontal:40,
+        fontFamily: 'SourceSansProBlack',
+        fontSize: 24,
+        color:'#fff',
+    },
+
     novaReceita:{
         paddingHorizontal: 20,
         top: 20,
@@ -150,4 +183,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default TelaReceita;
+export default TelaReceita
