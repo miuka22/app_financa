@@ -16,41 +16,40 @@ return(
         }}
     >
         <Stack.Screen 
-        name="TelaLogin" 
-        component={Telalogin}
-        options={{headerShown:false}} />
+            name="TelaLogin" 
+            component={Telalogin}
+            options={{headerShown:false}}
+        />
         <Stack.Screen 
-        name="TelaCadastro" 
-        component={TelaCadastro}
-        options={{headerShown:false}}
+            name="TelaCadastro" 
+            component={TelaCadastro}
+            options={{headerShown:false}}
         />
         <Stack.Screen
-        name="TelaEsqueceu"
-        component={TelaEsqueceu}
-        options={{headerShown:false}}
+            name="TelaEsqueceu"
+            component={TelaEsqueceu}
+            options={{headerShown:false}}
         />
         <Stack.Screen         
-        name="TelaPrincipal"
-        component={TelaPrincipal}
-        ////options={{headerShown:false}}
+            name="TelaPrincipal"
+            component={TelaPrincipal}
+            options={{headerShown:false}}
         />
         <Stack.Screen
-        name="TelaReceita"
-        component={TelaReceita}
-        options={{headerShown:false}}
+            name="TelaReceita"
+            component={TelaReceita}
+            options={{headerShown:false}}
         />
         <Stack.Screen
-        name="TelaDespesa"
-        component={TelaDespesa}
-        options={{headerShown:false}}
+            name="TelaDespesa"
+            component={TelaDespesa}
+            options={{headerShown:false}}
         />
         <Stack.Screen
-        name="TelaPerfil"
-        component={TelaPerfil}
-        options={{headerShown:false}}
+            name="TelaPerfil"
+            component={TelaPerfil}
+            options={{headerShown:false}}
         />
-        
-        
     </Stack.Navigator>
 ) 
 }

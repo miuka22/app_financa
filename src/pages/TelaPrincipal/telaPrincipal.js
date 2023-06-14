@@ -1,5 +1,6 @@
 import { Text, View, Image, StyleSheet, Pressable } from "react-native"
 import { useFonts } from 'expo-font'
+import { Menu, MenuOptions, MenuOption, MenuTrigger, MenuProvider } from 'react-native-popup-menu';
 
 function TelaPrincipal({navigation}) {
     const [loaded] = useFonts ({
@@ -17,7 +18,11 @@ function TelaPrincipal({navigation}) {
             <View style={styles.barraSuperior}>
                 <View style={styles.faixaUm}>
                     <View style={styles.menu}>
-
+                        <MenuProvider>
+                            <Menu>
+                                <MenuTrigger View='Select options'/>
+                            </Menu>
+                        </MenuProvider>
                     </View>
                         </View>
                     <View style={styles.perfil}>
