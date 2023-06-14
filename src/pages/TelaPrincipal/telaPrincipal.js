@@ -69,7 +69,7 @@ function TelaPrincipal({navigation}) {
         </View>
     )
 }
-
+//exclua-me
 const styles = StyleSheet.create({
     barraSuperior:{
         backgroundColor: '#7B68EE',
