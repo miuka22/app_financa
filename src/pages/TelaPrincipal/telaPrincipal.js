@@ -25,20 +25,15 @@ function TelaPrincipal({navigation}) {
                         </MenuProvider>
                     </View>
                         </View>
-                    <View style={styles.faixaUm}>
-                    <View style={styles.menu}>
-
-                    </View>
-                        </View>
                     <View style={styles.perfil}>
-                            <Image
-                                source={require('../../../assets/iconPerfil.png')}
-                                style={styles.iconPerfil}
-                                    ></Image>
-                            <Text style={styles.txt24sb}>
-                                Olá, Emily
-                            </Text>
-                        </View>
+                        <Image
+                            source={require('../../../assets/iconPerfil.png')}
+                            style={styles.iconPerfil}
+                            ></Image>
+                        <Text style={styles.txt24sb}>
+                            Olá, Emily
+                        </Text>
+                    </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
                       Saldo em conta
@@ -63,14 +58,7 @@ function TelaPrincipal({navigation}) {
                     />
                     <Text style={styles.txt12r}>Receita</Text>
                 </Pressable>
-
-
-                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
                 <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
-
-
-                <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
-
                     <Image
                         source={require('../../../assets/despesaOn.png')}
                         style={styles.iconInferior}
@@ -78,7 +66,6 @@ function TelaPrincipal({navigation}) {
                     <Text style={styles.txt12r}>Despesa</Text>
                 </Pressable>
             </View>
-            <View>
         </View>
     )
 }

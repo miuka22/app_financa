@@ -1,5 +1,3 @@
-
-
 import { Text, View, Image, StyleSheet, Pressable } from "react-native"
 import { useFonts } from 'expo-font'
 
@@ -59,10 +57,8 @@ function TelaDespesa({navigation}) {
                 </Pressable>
             </View>
         </View>
-
     )
 }
-
 
 const styles = StyleSheet.create({
     botaoNav: {
@@ -125,7 +121,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 12,
         fontFamily: 'SourceSansProRegular',
-        paddingTop: 6
+        paddingTop: 6,
     },
     iconPerfil:{
         height: 30,
