@@ -1,5 +1,7 @@
 import { Text, View, Image, StyleSheet, Pressable } from "react-native"
 import { useFonts } from 'expo-font'
+///import DetePicker  from  'react-native-datepicker'
+////import DatePicker from '@react-native-community/datetimepicker';
 
 function TelaReceita({navigation}) {
     const [loaded] = useFonts ({
@@ -11,7 +13,15 @@ function TelaReceita({navigation}) {
     if(!loaded){
       return null
     }
-
+   
+//state={ 
+  //  data:''
+//}
+///ChangeDate=(valor)=>{
+   ///this.setState({
+      ///  data:valor
+///})
+//}
     return(
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
@@ -35,6 +45,14 @@ function TelaReceita({navigation}) {
                 </View>
             </View>
             <View style={styles.formInput}>
+                <DatePicker
+                //format="DD/MM/YYYY"
+                //style={styles.datepicker}
+                 //date={this.state.date}
+                 //onDateChange={this.ChangeDate}
+
+                />
+
                 </View>            
                 
                 
@@ -148,6 +166,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         flexDirection: 'row',
     },
+    datepicker:{
+        width:300,
+    }
 })
 
 export default TelaReceita;
