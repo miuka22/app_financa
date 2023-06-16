@@ -1,51 +1,57 @@
-import { Text, View, Image, StyleSheet, Pressable } from "react-native"
-import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
+import { Text, View, Image, StyleSheet, Pressable, Animated } from "react-native"
+import { Button, Portal, Modal, PaperProvider } from 'react-native-paper';
 import { useFonts } from 'expo-font'
 import { useState } from "react"
+import { SafeAreaView } from "react-native-safe-area-context";
 
-function TelaPrincipal({navigation}) {
-    const [loaded] = useFonts ({
-      SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
-      SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
-      SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
-      SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
+function TelaPrincipal({ navigation }) {
+    const [loaded] = useFonts({
+        SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
+        SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
+        SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
+        SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
 
-    const abrirMenu = () => setVisible(true)
-    const fecharMenu = () => setVisible(false)
+    const abrirModal = () => setVisible(true)
+    const fecharModal = () => setVisible(false)
 
-    if(!loaded){
-      return null
+    if (!loaded) {
+        return null
     }
 
-    return(
+    return (
+
+        <PaperProvider>
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
                 <View style={styles.faixaUm}>
-                        </View>
-                    <View style={styles.perfil}>
-                        <Image
-                            source={require('../../../assets/iconPerfil.png')}
-                            style={styles.iconPerfil}
-                            ></Image>
-                        <Text style={styles.txt24sb}>
-                            Olá, Emily
-                        </Text>
-            <PaperProvider>
-                    <Menu visible={visible} onDismiss={fecharMenu} contentStyle={{backgroundColor: 'green', color: 'red', justifyContent: 'center', marginEnd: 160 }} anchor={<Pressable onPress={abrirMenu}><Text>AAAAAA</Text></Pressable>}>
-                        <Menu.Item title='item 1'/>
-                        <Menu.Item title='item 2'/>
-                        <Menu.Item title='item 3'/>
-                    </Menu>
-            </PaperProvider>
-                    </View>
+                </View>
+                <View style={styles.perfil}>
+                    <Image
+                        source={require('../../../assets/iconPerfil.png')}
+                        style={styles.iconPerfil}
+                    ></Image>
+                    <Text style={styles.txt24sb}>
+                        Olá, Emily
+                    </Text>
+                        <Portal style={{justifyContent:'flex-start'}}>
+                            <Modal visible={visible} onDismiss={fecharModal}
+                            style={{ justifyContent:'flex-start'}}
+                            contentContainerStyle={{backgroundColor: 'red', alignItems:'flex-end', }}>
+                                <View style={{backgroundColor: 'green', width:150,height:138}}></View>
+                            </Modal>
+                        </Portal>
+                        <Pressable onPress={abrirModal} style={styles.menu}>
+                            
+                        </Pressable>
+                </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
-                      Saldo em conta
+                        Saldo em conta
                     </Text>
                     <Text style={styles.txt28sb}>
-                      R$: 205,11
+                        R$: 205,11
                     </Text>
                 </View>
             </View>
@@ -57,14 +63,14 @@ function TelaPrincipal({navigation}) {
                     />
                     <Text style={styles.txt12b}>Principal</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
+                <Pressable onPress={() => navigation.navigate('TelaReceita')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/receitaOff.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12r}>Receita</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
+                <Pressable onPress={() => navigation.navigate('testes')} style={styles.botaoNav}>
                     <Image
                         source={require('../../../assets/despesaOff.png')}
                         style={styles.iconInferior}
@@ -73,6 +79,7 @@ function TelaPrincipal({navigation}) {
                 </Pressable>
             </View>
         </View>
+                    </PaperProvider>
     )
 }
 //exclua-me
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 20
     },
-    barraSuperior:{
+    barraSuperior: {
         backgroundColor: '#7B68EE',
         height: 200,
     },
@@ -100,53 +107,53 @@ const styles = StyleSheet.create({
         width: 30,
         backgroundColor: '#FFFFFF'
     },
-    perfil:{
+    perfil: {
         top: 50,
         paddingHorizontal: 40,
         flexDirection: 'row',
     },
-    saldo:{
+    saldo: {
         //backgroundColor: '#505050',
         height: 100,
-        paddingHorizontal:40,
-        top:75
+        paddingHorizontal: 40,
+        top: 75
     },
-    txt25bk:{
+    txt25bk: {
         color: '#FFFFFF',
         fontSize: 25,
         fontFamily: 'SourceSansProBlack',
         //backgroundColor: '#101010',
         alignItems: 'baseline'
     },
-    txt12b:{
+    txt12b: {
         color: '#FFFFFF',
         fontSize: 12,
         fontFamily: 'SourceSansProBold',
         paddingTop: 6,
     },
-    txt24sb:{
+    txt24sb: {
         color: '#FFFFFF',
         fontSize: 24,
         fontFamily: 'SourceSansProSemiBold',
         paddingHorizontal: 10,
     },
-    txt28sb:{
+    txt28sb: {
         color: '#ffffff',
         fontSize: 28,
         fontFamily: 'SourceSansProSemiBold',
-        paddingHorizontal:30
+        paddingHorizontal: 30
     },
-    txt12r:{
+    txt12r: {
         color: '#FFFFFF',
         fontSize: 12,
         fontFamily: 'SourceSansProRegular',
         paddingTop: 6,
     },
-    iconPerfil:{
+    iconPerfil: {
         height: 30,
         width: 30,
     },
-    fundo:{
+    fundo: {
         flex: 1,
         justifyContent: 'space-between',
     },
@@ -155,11 +162,11 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         width: 60,
     },
-    iconInferior:{
+    iconInferior: {
         height: 25,
         width: 25,
     },
-    barraInferior:{
+    barraInferior: {
         alignItems: 'center',
         backgroundColor: '#7B68EE',
         height: 80,

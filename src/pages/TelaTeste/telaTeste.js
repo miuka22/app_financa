@@ -1,34 +1,26 @@
-import {useState} from 'react';
-import { View } from 'react-native';
-import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
+import * as React from 'react';
+import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
 
 const TelaTeste = () => {
-  const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = React.useState(false);
 
-  const openMenu = () => setVisible(true);
-
-  const closeMenu = () => setVisible(false);
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
+    const containerStyle = {backgroundColor: 'white', padding: 20};
 
   return (
     <PaperProvider>
-      <View
-        style={{
-          paddingTop: 50,
-          flexDirection: 'row',
-          justifyContent: 'center',
-        }}>
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={<Button onPress={openMenu}>Show menu</Button>}>
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
-          <Divider />
-          <Menu.Item onPress={() => {}} title="Item 3" />
-        </Menu>
-      </View>
+      <Portal>
+        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+          <Text>Example Modal.  Click outside this area to dismiss.</Text>
+        </Modal>
+      </Portal>
+      <Button style={{marginTop: 30}} onPress={showModal}>
+        Show
+      </Button>
     </PaperProvider>
   );
+
 };
 
 export default TelaTeste;
