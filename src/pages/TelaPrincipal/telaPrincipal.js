@@ -1,6 +1,7 @@
 import { Text, View, Image, StyleSheet, Pressable } from "react-native"
+import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
 import { useFonts } from 'expo-font'
-import { Menu, MenuOptions, MenuOption, MenuTrigger, MenuProvider } from 'react-native-popup-menu';
+import { useState } from "react"
 
 function TelaPrincipal({navigation}) {
     const [loaded] = useFonts ({
@@ -9,6 +10,11 @@ function TelaPrincipal({navigation}) {
       SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
       SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
+    const [visible, setVisible] = useState(true)
+
+    const abrirMenu = () => setVisible(true)
+    const fecharMenu = () => setVisible(false)
+
     if(!loaded){
       return null
     }
@@ -17,13 +23,6 @@ function TelaPrincipal({navigation}) {
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
                 <View style={styles.faixaUm}>
-                    <View style={styles.menu}>
-                        <MenuProvider>
-                            <Menu>
-                                <MenuTrigger View='Select options'/>
-                            </Menu>
-                        </MenuProvider>
-                    </View>
                         </View>
                     <View style={styles.perfil}>
                         <Image
@@ -33,6 +32,13 @@ function TelaPrincipal({navigation}) {
                         <Text style={styles.txt24sb}>
                             Olá, Emily
                         </Text>
+            <PaperProvider>
+                    <Menu visible={visible} onDismiss={fecharMenu} contentStyle={{backgroundColor: 'green', color: 'red', justifyContent: 'center', marginEnd: 160 }} anchor={<Pressable onPress={abrirMenu}><Text>AAAAAA</Text></Pressable>}>
+                        <Menu.Item title='item 1'/>
+                        <Menu.Item title='item 2'/>
+                        <Menu.Item title='item 3'/>
+                    </Menu>
+            </PaperProvider>
                     </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
@@ -53,14 +59,14 @@ function TelaPrincipal({navigation}) {
                 </Pressable>
                 <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
                     <Image
-                        source={require('../../../assets/receitaOn.png')}
+                        source={require('../../../assets/receitaOff.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12r}>Receita</Text>
                 </Pressable>
                 <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
                     <Image
-                        source={require('../../../assets/despesaOn.png')}
+                        source={require('../../../assets/despesaOff.png')}
                         style={styles.iconInferior}
                     />
                     <Text style={styles.txt12r}>Despesa</Text>
@@ -71,6 +77,15 @@ function TelaPrincipal({navigation}) {
 }
 //exclua-me
 const styles = StyleSheet.create({
+    teste: {
+        backgroundColor: '#505050',
+        height: 20,
+        width: 30,
+    },
+    modal: {
+        backgroundColor: 'white',
+        padding: 20
+    },
     barraSuperior:{
         backgroundColor: '#7B68EE',
         height: 200,
@@ -78,7 +93,7 @@ const styles = StyleSheet.create({
     faixaUm: {
         top: 50,
         paddingHorizontal: 40,
-        alignItems: 'flex-end',
+        //alignItems: 'flex-end',
     },
     menu: {
         height: 20,

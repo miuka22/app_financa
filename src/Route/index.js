@@ -6,15 +6,21 @@ import TelaPrincipal from "../pages/TelaPrincipal/telaPrincipal"
 import TelaReceita from "../pages/TelaReceita/telaReceita"
 import TelaDespesa from "../pages/TelaDespesa/telaDespesa"
 import TelaPerfil from "../pages/TelaPerfil/telaPerfil"
+import TelaTeste from "../pages/TelaTeste/telaTeste"
 const Stack = createNativeStackNavigator();
 function rota(){
 
 return(
     <Stack.Navigator initialRouteName='TelaPrincipal'
+    //<Stack.Navigator initialRouteName='TelaPrincipal'
         screenOptions={{
             animation: 'none'
         }}
     >
+        <Stack.Screen
+            name="testes"
+            component={TelaTeste}
+        ></Stack.Screen>
         <Stack.Screen 
             name="TelaLogin" 
             component={Telalogin}
