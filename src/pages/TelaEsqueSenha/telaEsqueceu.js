@@ -56,7 +56,7 @@ Logo:{
     justifyContent: 'center',
 },
 LogoTitle:{
-    color:'#ffff',
+    color:'#ffffff',
     fontStyle: 'normal',
     fontWeight: 700,
     fontSize:25,

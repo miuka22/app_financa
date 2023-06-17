@@ -26,24 +26,32 @@ function TelaPrincipal({ navigation }) {
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
                 <View style={styles.faixaUm}>
-                </View>
-                <View style={styles.perfil}>
+                    <View style={styles.perfil}>
                     <Image
                         source={require('../../../assets/iconPerfil.png')}
                         style={styles.iconPerfil}
-                    ></Image>
+                        ></Image>
                     <Text style={styles.txt24sb}>
                         Olá, Emily
                     </Text>
-                        <Portal style={{justifyContent:'flex-start'}}>
+                    </View>
+                        <Portal>
                             <Modal visible={visible} onDismiss={fecharModal}
-                            style={{ justifyContent:'flex-start'}}
-                            contentContainerStyle={{backgroundColor: 'red', alignItems:'flex-end', }}>
-                                <View style={{backgroundColor: 'green', width:150,height:138}}></View>
+                            style={styles.menuModal}
+                            >
+                                <View style={styles.menuConteudo}>
+                                    <Pressable style={styles.menuItem}><Text style={styles.txt16b}>Perfil</Text></Pressable>
+                                </View>
+                                <View style={styles.menuConteudo}>
+                                    <Pressable onPress={()=>navigation.navigate('TelaLogin')} style={styles.menuItem}><Text style={styles.txt16b}>Sair</Text></Pressable>
+                                </View>
+                                <View style={styles.menuConteudo}>
+                                    <Pressable style={styles.menuItem}><Text style={styles.txt16b}>Termos de uso</Text></Pressable>
+                                </View>
                             </Modal>
                         </Portal>
-                        <Pressable onPress={abrirModal} style={styles.menu}>
-                            
+                        <Pressable onPress={abrirModal}>
+                            <Image style={styles.menu} source={require('../../../assets/menu.png')}/>
                         </Pressable>
                 </View>
                 <View style={styles.saldo}>
@@ -82,38 +90,43 @@ function TelaPrincipal({ navigation }) {
                     </PaperProvider>
     )
 }
-//exclua-me
+
 const styles = StyleSheet.create({
-    teste: {
-        backgroundColor: '#505050',
-        height: 20,
-        width: 30,
+    menuModal: {
+        justifyContent:'flex-start',
+        alignItems: 'flex-end',
     },
-    modal: {
-        backgroundColor: 'white',
-        padding: 20
+    menuConteudo: {
+        backgroundColor: '#9485EE',
+        width:139,
+        height:51,
+        alignItems:'flex-end',
+    },
+    menuItem: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#6252BA',
+        height: 49,
+        width: 137,
+    },
+    perfil: {
+        flexDirection:'row'
     },
     barraSuperior: {
         backgroundColor: '#7B68EE',
         height: 200,
     },
-    faixaUm: {
-        top: 50,
-        paddingHorizontal: 40,
-        //alignItems: 'flex-end',
-    },
     menu: {
         height: 20,
         width: 30,
-        backgroundColor: '#FFFFFF'
     },
-    perfil: {
+    faixaUm: {
         top: 50,
         paddingHorizontal: 40,
         flexDirection: 'row',
+        justifyContent:'space-between',
     },
     saldo: {
-        //backgroundColor: '#505050',
         height: 100,
         paddingHorizontal: 40,
         top: 75
@@ -130,6 +143,11 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: 'SourceSansProBold',
         paddingTop: 6,
+    },
+    txt16b: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontFamily: 'SourceSansProBold',
     },
     txt24sb: {
         color: '#FFFFFF',
