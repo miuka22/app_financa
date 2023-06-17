@@ -1,5 +1,6 @@
 import { Text, View, Image, StyleSheet, Pressable } from "react-native"
 import { useFonts } from 'expo-font'
+import { BarraInferiorReceita } from "../../Componente/BarraInferior"
 
 function TelaReceita({navigation}) {
     const [loaded] = useFonts ({
@@ -38,30 +39,8 @@ function TelaReceita({navigation}) {
                 </View>            
                 
                 
-                <View style={styles.barraInferior}>
-                <Pressable onPress={()=>navigation.navigate('TelaPrincipal')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/homeOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12r}>Principal</Text>
-                </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/receitaOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12b}>Receita</Text>
-                </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/despesaOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12b}>Despesa</Text>
-                </Pressable>
-            </View>
-        </View>
+                <BarraInferiorReceita/>
+                </View>
     )
 }
 
@@ -89,12 +68,6 @@ const styles = StyleSheet.create({
         //backgroundColor: '#101010',
         ///alignItems: 'baseline'
     },
-    txt12b:{
-        color: '#FFFFFF',
-        fontSize: 12,
-        fontFamily: 'SourceSansProBold',
-        paddingTop: 6,
-    },
     txt24sb:{
         color: '#FFFFFF',
         fontSize: 35,
@@ -109,12 +82,6 @@ const styles = StyleSheet.create({
         ///paddingHorizontal:30
         
     },
-    txt12r:{
-        color: '#FFFFFF',
-        fontSize: 12,
-        fontFamily: 'SourceSansProRegular',
-        paddingTop: 6,
-    },
     iconlapis:{
         height: 25,
         width: 25,
@@ -124,29 +91,10 @@ const styles = StyleSheet.create({
         left:300,
         top:35,
         position: 'absolute',
-        
-        
-        
     },
     fundo:{
         flex: 1,
         justifyContent: 'space-between',
-    },
-    botaoNav: {
-        alignItems: 'center',
-        paddingVertical: 16,
-        width: 60,
-    },
-    iconInferior:{
-        height: 27,
-        width: 27,
-    },
-    barraInferior:{
-        alignItems: 'center',
-        backgroundColor: '#7B68EE',
-        height: 65,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
     },
 })
 

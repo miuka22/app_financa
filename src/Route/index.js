@@ -7,6 +7,7 @@ import TelaReceita from "../pages/TelaReceita/telaReceita"
 import TelaDespesa from "../pages/TelaDespesa/telaDespesa"
 import TelaPerfil from "../pages/TelaPerfil/telaPerfil"
 import TelaTeste from "../pages/TelaTeste/telaTeste"
+
 const Stack = createNativeStackNavigator();
 function rota(){
 

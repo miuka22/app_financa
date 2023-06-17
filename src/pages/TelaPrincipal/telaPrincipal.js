@@ -1,8 +1,9 @@
 import { Text, View, Image, StyleSheet, Pressable, Animated } from "react-native"
-import { Button, Portal, Modal, PaperProvider } from 'react-native-paper';
+import { Portal, Modal, PaperProvider } from 'react-native-paper'
 import { useFonts } from 'expo-font'
 import { useState } from "react"
-import { SafeAreaView } from "react-native-safe-area-context";
+import { BarraInferiorPrincipal } from '../../Componente/BarraInferior'
+import { MenuSup } from '../../Componente/Menu'
 
 function TelaPrincipal({ navigation }) {
     const [loaded] = useFonts({
@@ -35,7 +36,8 @@ function TelaPrincipal({ navigation }) {
                         Olá, Emily
                     </Text>
                     </View>
-                        <Portal>
+                    <MenuSup/>
+                        {/* <Portal>
                             <Modal visible={visible} onDismiss={fecharModal}
                             style={styles.menuModal}
                             >
@@ -52,7 +54,7 @@ function TelaPrincipal({ navigation }) {
                         </Portal>
                         <Pressable onPress={abrirModal}>
                             <Image style={styles.menu} source={require('../../../assets/menu.png')}/>
-                        </Pressable>
+                        </Pressable> */}
                 </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
@@ -63,29 +65,7 @@ function TelaPrincipal({ navigation }) {
                     </Text>
                 </View>
             </View>
-            <View style={styles.barraInferior}>
-                <Pressable style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/homeOn.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12b}>Principal</Text>
-                </Pressable>
-                <Pressable onPress={() => navigation.navigate('TelaReceita')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/receitaOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12r}>Receita</Text>
-                </Pressable>
-                <Pressable onPress={() => navigation.navigate('testes')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/despesaOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12r}>Despesa</Text>
-                </Pressable>
-            </View>
+            <BarraInferiorPrincipal/>
         </View>
                     </PaperProvider>
     )
@@ -135,7 +115,6 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 25,
         fontFamily: 'SourceSansProBlack',
-        //backgroundColor: '#101010',
         alignItems: 'baseline'
     },
     txt12b: {
@@ -174,22 +153,6 @@ const styles = StyleSheet.create({
     fundo: {
         flex: 1,
         justifyContent: 'space-between',
-    },
-    botaoNav: {
-        alignItems: 'center',
-        paddingVertical: 16,
-        width: 60,
-    },
-    iconInferior: {
-        height: 25,
-        width: 25,
-    },
-    barraInferior: {
-        alignItems: 'center',
-        backgroundColor: '#7B68EE',
-        height: 80,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
     },
 })
 

@@ -1,5 +1,6 @@
 import { Text, View, Image, StyleSheet, Pressable } from "react-native"
 import { useFonts } from 'expo-font'
+import { BarraInferiorDespesa } from "../../Componente/BarraInferior"
 
 function TelaDespesa({navigation}) {
     const [loaded] = useFonts ({
@@ -33,50 +34,12 @@ function TelaDespesa({navigation}) {
                     </Text>
                 </View>
             </View>
-            <View style={styles.barraInferior}>
-                <Pressable onPress={()=>navigation.navigate('TelaPrincipal')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/homeOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12r}>Principal</Text>
-                </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaReceita')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/receitaOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12b}>Receita</Text>
-                </Pressable>
-                <Pressable onPress={()=>navigation.navigate('TelaDespesa')} style={styles.botaoNav}>
-                    <Image
-                        source={require('../../../assets/despesaOff.png')}
-                        style={styles.iconInferior}
-                    />
-                    <Text style={styles.txt12b}>Despesa</Text>
-                </Pressable>
-            </View>
+            <BarraInferiorDespesa/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    botaoNav: {
-        alignItems: 'center',
-        paddingVertical: 16,
-        width: 60,
-    },
-    iconInferior:{
-        height: 28,
-        width: 28,
-    },
-    barraInferior:{
-        alignItems: 'center',
-        backgroundColor: '#7B68EE',
-        height: 82,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-    },
     barraSuperior:{
         backgroundColor: '#7B68EE',
         height: 200,

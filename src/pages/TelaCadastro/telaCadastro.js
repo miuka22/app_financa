@@ -11,4 +11,5 @@ const style = StyleSheet.create({
 flex:1
   }
 })
+
 export default TelaCadastro;
