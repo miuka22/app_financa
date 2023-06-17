@@ -1,7 +1,5 @@
 import { Text, View, Image, StyleSheet, Pressable, Animated } from "react-native"
-import { Portal, Modal, PaperProvider } from 'react-native-paper'
 import { useFonts } from 'expo-font'
-import { useState } from "react"
 import { BarraInferiorPrincipal } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
 
@@ -12,18 +10,12 @@ function TelaPrincipal({ navigation }) {
         SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
         SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
-    const [visible, setVisible] = useState(false)
-
-    const abrirModal = () => setVisible(true)
-    const fecharModal = () => setVisible(false)
 
     if (!loaded) {
         return null
     }
 
     return (
-
-        <PaperProvider>
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
                 <View style={styles.faixaUm}>
@@ -37,24 +29,6 @@ function TelaPrincipal({ navigation }) {
                     </Text>
                     </View>
                     <MenuSup/>
-                        {/* <Portal>
-                            <Modal visible={visible} onDismiss={fecharModal}
-                            style={styles.menuModal}
-                            >
-                                <View style={styles.menuConteudo}>
-                                    <Pressable style={styles.menuItem}><Text style={styles.txt16b}>Perfil</Text></Pressable>
-                                </View>
-                                <View style={styles.menuConteudo}>
-                                    <Pressable onPress={()=>navigation.navigate('TelaLogin')} style={styles.menuItem}><Text style={styles.txt16b}>Sair</Text></Pressable>
-                                </View>
-                                <View style={styles.menuConteudo}>
-                                    <Pressable style={styles.menuItem}><Text style={styles.txt16b}>Termos de uso</Text></Pressable>
-                                </View>
-                            </Modal>
-                        </Portal>
-                        <Pressable onPress={abrirModal}>
-                            <Image style={styles.menu} source={require('../../../assets/menu.png')}/>
-                        </Pressable> */}
                 </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
@@ -67,38 +41,16 @@ function TelaPrincipal({ navigation }) {
             </View>
             <BarraInferiorPrincipal/>
         </View>
-                    </PaperProvider>
     )
 }
 
 const styles = StyleSheet.create({
-    menuModal: {
-        justifyContent:'flex-start',
-        alignItems: 'flex-end',
-    },
-    menuConteudo: {
-        backgroundColor: '#9485EE',
-        width:139,
-        height:51,
-        alignItems:'flex-end',
-    },
-    menuItem: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#6252BA',
-        height: 49,
-        width: 137,
-    },
     perfil: {
         flexDirection:'row'
     },
     barraSuperior: {
         backgroundColor: '#7B68EE',
         height: 200,
-    },
-    menu: {
-        height: 20,
-        width: 30,
     },
     faixaUm: {
         top: 50,
@@ -122,11 +74,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: 'SourceSansProBold',
         paddingTop: 6,
-    },
-    txt16b: {
-        color: '#FFFFFF',
-        fontSize: 16,
-        fontFamily: 'SourceSansProBold',
     },
     txt24sb: {
         color: '#FFFFFF',
