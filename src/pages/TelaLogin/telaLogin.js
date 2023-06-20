@@ -53,9 +53,7 @@ Conteiner:{
 },
 Logo:{
     
-    color: '#0A0541',
     alignItems:'center',
-    textAlign: 'center',
     justifyContent: 'center',
 },
 LogoTitle:{
@@ -63,6 +61,7 @@ LogoTitle:{
     fontStyle: 'normal',
     fontWeight: 700,
     fontSize:43,
+    marginVertical:20
 },
 conteinerForm:{
     width: 350,

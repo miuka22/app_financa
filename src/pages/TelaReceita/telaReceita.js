@@ -12,7 +12,15 @@ function TelaReceita({navigation}) {
     if(!loaded){
       return null
     }
-
+   
+//state={ 
+  //  data:''
+//}
+///ChangeDate=(valor)=>{
+   ///this.setState({
+      ///  data:valor
+///})
+//}
     return(
         <View style={styles.fundo}>
             <View style={styles.barraSuperior}>
@@ -36,6 +44,14 @@ function TelaReceita({navigation}) {
                 </View>
             </View>
             <View style={styles.formInput}>
+                <DatePicker
+                //format="DD/MM/YYYY"
+                //style={styles.datepicker}
+                 //date={this.state.date}
+                 //onDateChange={this.ChangeDate}
+
+                />
+
                 </View>            
                 
                 
@@ -96,6 +112,25 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
     },
+    botaoNav: {
+        alignItems: 'center',
+        paddingVertical: 16,
+        width: 60,
+    },
+    iconInferior:{
+        height: 27,
+        width: 27,
+    },
+    barraInferior:{
+        alignItems: 'center',
+        backgroundColor: '#7B68EE',
+        height: 65,
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+    },
+    datepicker:{
+        width:300,
+    }
 })
 
 export default TelaReceita;
