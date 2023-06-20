@@ -1,3 +1,4 @@
+
 import { Text, View, Image, StyleSheet, Pressable, Animated } from "react-native"
 import { useFonts } from 'expo-font'
 import { BarraInferiorPrincipal } from '../../Componente/BarraInferior'
