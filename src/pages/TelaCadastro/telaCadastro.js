@@ -54,14 +54,14 @@ const styles = StyleSheet.create({
 Conteiner:{
   flex:2,
   alignContent:'center',
-  justifyContent:'center',
   backgroundColor:'#423880'
 
 },
 barraSuperior:{
   backgroundColor:'#BBB2F0',
   height: 100,
-  padding:10
+  padding:10,
+  alignItems:'flex-start',
 },
 textTitle:{
 
@@ -69,8 +69,9 @@ textTitle:{
 form:{
   alignItems:'center',
   justifyContent:'center',
-  marginTop:15,
-  paddingHorizontal:12
+  flex:1,
+  marginBottom:250,
+  paddingHorizontal:12, 
 },
 formTxt:{
   width: 350,
