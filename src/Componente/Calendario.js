@@ -3,24 +3,14 @@ import { View, Text, StyleSheet, Pressable, Image } from "react-native"
 import { Portal, Modal } from "react-native-paper"
 import { useNavigation } from "@react-navigation/native"
 
-function MenuSup() {
+function Calendario() {
     const navigation = useNavigation()
     const [visible, setVisible] = useState(false)
 
     const abrirModal = () => setVisible(true)
     const fecharModal = () => setVisible(false)
 
-    const btnSair = () => {
-        navigation.navigate('TelaLogin')
-        fecharModal()
-    }
-    const btnPerfil = () => {
-        navigation.navigate('testes')
-        fecharModal()
-    }
-    const btnTermosDeUso = () => {
-        fecharModal()
-    }
+    
 
     return (
         <View>
@@ -30,14 +20,13 @@ function MenuSup() {
                     onDismiss={fecharModal}
                     style={styles.menuModal}
                 >
-                    <View style={styles.menuConteudo}>
-                        <Pressable onPress={btnPerfil} style={styles.menuItem}><Text style={styles.txt16b}>Perfil</Text></Pressable>
-                    </View>
-                    <View style={styles.menuConteudo}>
-                        <Pressable onPress={btnSair} style={styles.menuItem}><Text style={styles.txt16b}>Sair</Text></Pressable>
-                    </View>
-                    <View style={styles.menuConteudo}>
-                        <Pressable onPress={btnTermosDeUso} style={styles.menuItem}><Text style={styles.txt16b}>Termos de uso</Text></Pressable>
+                    <View style={styles.conteiner}>
+                        <View style={styles.calendario}>
+
+                        </View>
+                        <View style={styles.localBotoes}>
+
+                        </View>
                     </View>
                 </Modal>
             </Portal>
@@ -50,8 +39,8 @@ function MenuSup() {
 
 const styles = StyleSheet.create({
     menuModal: {
-        justifyContent:'flex-start',
-        alignItems: 'flex-end',
+        justifyContent:'center',
+        alignItems: 'center',
     },
     menuConteudo: {
         backgroundColor: '#9485EE',
@@ -71,10 +60,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'SourceSansProBold',
     },
-    menu: {
-        height: 20,
-        width: 30,
+    conteiner: {
+        height: 250,
+        width: 250,
+        backgroundColor: '#505050'
     },
 })
 
-export { MenuSup }
+export { Calendario }

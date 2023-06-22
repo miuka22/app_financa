@@ -1,12 +1,21 @@
 import { useState } from 'react';
 import { View,Text,StyleSheet,TextInput,TouchableOpacity } from 'react-native';
+import { useWindowDimensions } from 'react-native';
+
 
 function TelaLogin({navigation}) {
+    const {height, width} = useWindowDimensions();
     const [email, setEmail]= useState('')
     const [senha ,setSenha]= useState('')
-
-  return (
-    <View style={styles.Conteiner}>
+    
+    return (
+    <View style={{
+        height: height,
+        justifyContent:'center',
+        alignItems:'center',
+        alignContent:'center',
+        backgroundColor:'#7B68EE',
+    }}>
     <View style={styles.Logo}>
         <Text style={styles.LogoTitle}>MONEY MIND</Text>
     </View>
@@ -43,14 +52,14 @@ function TelaLogin({navigation}) {
 }
 export default TelaLogin;
 const styles = StyleSheet.create({
-Conteiner:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
-    alignContent:'center',
-    backgroundColor:'#7B68EE',
+// Conteiner:{
+//     height: height,
+//     justifyContent:'center',
+//     alignItems:'center',
+//     alignContent:'center',
+//     backgroundColor:'#7B68EE',
     
-},
+// },
 Logo:{
     
     alignItems:'center',

@@ -1,38 +1,62 @@
-import { Text, View, Image, StyleSheet, Pressable } from "react-native"
-import { useFonts } from 'expo-font'
-import { BarraInferiorDespesa } from "../../Componente/BarraInferior"
 
-function TelaDespesa({navigation}) {
-    const [loaded] = useFonts ({
-      SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
-      SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
-      SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
-      SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
+import { Text, View, TextInput, Image, StyleSheet, Pressable, useWindowDimensions } from "react-native"
+import { useFonts } from 'expo-font'
+import { BarraInferiorDespesa } from '../../Componente/BarraInferior'
+import { MenuSup } from '../../Componente/Menu'
+import { Calendario } from "../../Componente/Calendario"
+import { useState } from "react"
+import CurrencyInput from 'react-native-currency-input';
+
+function TelaPrincipal({ navigation }) {
+    const [loaded] = useFonts({
+        SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
+        SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
+        SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
+        SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
-    if(!loaded){
-      return null
+    const [value, setValue] = useState(0);
+    const {height, width} = useWindowDimensions();
+
+    if (!loaded) {
+        return null
     }
 
-    return(
-        <View style={styles.fundo}>
+    return (
+        <View style={{
+            height: height,
+            justifyContent: 'space-between',
+        }}>
             <View style={styles.barraSuperior}>
-                <View style={styles.perfil}>
-                    <Image
-                        source={require('../../../assets/iconPerfil.png')}
-                        style={styles.iconPerfil}
-                    ></Image>
-                    <Text style={styles.txt24sb}>
-                        tela de despesaOff
+                <View style={styles.faixaUm}>
+                    <View style={styles.perfil}>
+                    <Text style={styles.txt25bk}>
+                        Nova Despesa
                     </Text>
+                    </View>
+                    <MenuSup/>
                 </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
-                      Saldo em conta
+                        Valor
                     </Text>
-                    <Text style={styles.txt28sb}>
-                      R$: 205,11
-                    </Text>
+                    <View style={styles.valor}>
+                        <Text style={styles.txt28sb}>R$ </Text>
+                        <CurrencyInput
+                            style={styles.txt28sb}
+                            value={value}
+                            onChangeValue={setValue}
+                            delimiter="."
+                            separator=","
+                            minValue={0}
+                            placeholder="0,00"
+                            placeholderTextColor={'#FFFFFF'}
+                        />
+                    </View>
                 </View>
+            </View>
+            <View style={styles.form}>
+                <Calendario/>
+                <Pressable><Text>ADICIONAR</Text></Pressable>
             </View>
             <BarraInferiorDespesa/>
         </View>
@@ -40,60 +64,59 @@ function TelaDespesa({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    barraSuperior:{
+    form: {},
+    barraSuperior: {
         backgroundColor: '#7B68EE',
         height: 200,
     },
-    perfil:{
-        paddingHorizontal: 40,
+    valor: {
+        flexDirection: 'row'
+    },
+    faixaUm: {
         top: 50,
+        paddingHorizontal: 40,
+        height: 50,
         flexDirection: 'row',
+        justifyContent:'space-between',
     },
-    saldo:{
-        //backgroundColor: '#505050',
+    saldo: {
         height: 100,
-        paddingHorizontal:40,
-        top:75
+        paddingHorizontal: 40,
+        top: 75
     },
-    txt25bk:{
+    txt25bk: {
         color: '#FFFFFF',
         fontSize: 25,
         fontFamily: 'SourceSansProBlack',
-        //backgroundColor: '#101010',
         alignItems: 'baseline'
     },
-    txt12b:{
+    txt12b: {
         color: '#FFFFFF',
         fontSize: 12,
         fontFamily: 'SourceSansProBold',
         paddingTop: 6,
     },
-    txt24sb:{
+    txt24sb: {
         color: '#FFFFFF',
         fontSize: 24,
         fontFamily: 'SourceSansProSemiBold',
         paddingHorizontal: 10,
     },
-    txt28sb:{
+    txt28sb: {
         color: '#ffffff',
         fontSize: 28,
         fontFamily: 'SourceSansProSemiBold',
-        paddingHorizontal:30
     },
-    txt12r:{
+    txt12r: {
         color: '#FFFFFF',
         fontSize: 12,
         fontFamily: 'SourceSansProRegular',
         paddingTop: 6,
     },
-    iconPerfil:{
+    iconPerfil: {
         height: 30,
         width: 30,
     },
-    fundo:{
-        flex: 1,
-        justifyContent: 'space-between',
-    },
 })
 
-export default TelaDespesa;
+export default TelaPrincipal;

@@ -44,13 +44,13 @@ function TelaReceita({navigation}) {
                 </View>
             </View>
             <View style={styles.formInput}>
-                <DatePicker
+                {/*<DatePicker
                 //format="DD/MM/YYYY"
                 //style={styles.datepicker}
                  //date={this.state.date}
                  //onDateChange={this.ChangeDate}
 
-                />
+                />*/}
 
                 </View>            
                 
