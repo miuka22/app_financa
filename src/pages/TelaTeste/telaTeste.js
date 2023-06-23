@@ -11,6 +11,7 @@ const TelaTeste = () => {
       onDayPress={day => {
         setSelected(day.dateString);
       }}
+      current={'2012-03-01'}
       markedDates={{
         [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
       }}

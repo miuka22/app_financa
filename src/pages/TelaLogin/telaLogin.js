@@ -14,7 +14,7 @@ function TelaLogin({navigation}) {
         justifyContent:'center',
         alignItems:'center',
         alignContent:'center',
-        backgroundColor:'#7B68EE',
+        backgroundColor:'#423880',
     }}>
     <View style={styles.Logo}>
         <Text style={styles.LogoTitle}>MONEY MIND</Text>
@@ -112,7 +112,7 @@ btEntrar:{
 Entrar:{
     fontSize:22,
     fontWeight:700,
-    color:'#7B68EE'
+    color:'#423880'
 },
 criarConta:{
     width: 150,

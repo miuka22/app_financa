@@ -45,7 +45,7 @@ Conteiner:{
     justifyContent:'center',
     alignItems:'center',
     alignContent:'center',
-    backgroundColor:'#7B68EE',
+    backgroundColor:'#423880',
     
 },
 Logo:{

@@ -64,9 +64,11 @@ function TelaPrincipal({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    form: {},
+    form: {
+        alignItems: 'center'
+    },
     barraSuperior: {
-        backgroundColor: '#7B68EE',
+        backgroundColor: '#423880',
         height: 200,
     },
     valor: {

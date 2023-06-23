@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     barraSuperior: {
-        backgroundColor: '#7B68EE',
+        backgroundColor: '#423880',
         height: 200,
     },
     faixaUm: {

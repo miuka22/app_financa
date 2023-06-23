@@ -62,7 +62,7 @@ function TelaReceita({navigation}) {
 
 const styles = StyleSheet.create({
     barraSuperior:{
-        backgroundColor: '#7B68EE',
+        backgroundColor: '#423880',
         height: 160,
     },
     novaReceita:{
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     barraInferior:{
         alignItems: 'center',
-        backgroundColor: '#7B68EE',
+        backgroundColor: '#423880',
         height: 65,
         justifyContent: 'space-evenly',
         flexDirection: 'row',
