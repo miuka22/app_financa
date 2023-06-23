@@ -7,7 +7,7 @@ import {Calendar, LocaleConfig} from 'react-native-calendars';
 
 function Calendario() {
     const navigation = useNavigation()
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
 
     const [loaded] = useFonts({
         SourceSansProSemiBold: require('../../assets/fonts/SourceSansPro-SemiBold.ttf'),
@@ -15,8 +15,15 @@ function Calendario() {
 
     const abrirModal = () => setVisible(true)
     const fecharModal = () => setVisible(false)
+    
+    console.log(new Date().getDay)
+    function mes() {if (new Date().getMonth() <9){
+        return(`0${new Date().getMonth()+1}`)
+    } else {
+        return(`${new Date().getMonth()+1}`)
+    }}
 
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useState(`${new Date().getDate()}/${mes()}/${new Date().getFullYear()}`);
 
     if (!loaded) {
         return null
@@ -41,12 +48,10 @@ function Calendario() {
                                 [selected]: {selected: true, disableTouchEvent: true, selectedColor: '#423880'}
                             }}
                             theme={{
-                                backgroundColor: '#ff0',
                                 calendarBackground: '#FFFFFF',
                                 selectedDayTextColor: '#FFFFFF',
-                                todayTextColor: '#423880',
-                                dayTextColor: '#2d4150',
-                                textDisabledColor: '#C1C1C1'
+                                todayTextColor: '#6252BA',
+                                textDisabledColor: '#C1C1C1',
                             }}
                             />
                         </View>
@@ -57,7 +62,7 @@ function Calendario() {
                 </Modal>
             </Portal>
             <Pressable style={styles.btnCalendario} onPress={abrirModal}>
-                <Text style={styles.txt24sb}>DATA</Text>
+                <Text style={styles.txt24sb} placeholder='opa'>{selected.split('-').reverse().join('/')}</Text>
             </Pressable>
         </View>
     )
