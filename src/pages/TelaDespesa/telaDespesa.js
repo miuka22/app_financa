@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font'
 import { BarraInferiorDespesa } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
 import { Calendario } from "../../Componente/Calendario"
+import { Categoria } from "../../Componente/Categoria"
 import { useState } from "react"
 import CurrencyInput from 'react-native-currency-input';
 
@@ -56,6 +57,7 @@ function TelaPrincipal({ navigation }) {
             </View>
             <View style={styles.form}>
                 <Calendario/>
+                <Categoria/>
                 <Pressable><Text>ADICIONAR</Text></Pressable>
             </View>
             <BarraInferiorDespesa/>

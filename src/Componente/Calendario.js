@@ -16,7 +16,6 @@ function Calendario() {
     const abrirModal = () => setVisible(true)
     const fecharModal = () => setVisible(false)
     
-    console.log(new Date().getDay)
     function mes() {if (new Date().getMonth() <9){
         return(`0${new Date().getMonth()+1}`)
     } else {
@@ -62,7 +61,7 @@ function Calendario() {
                 </Modal>
             </Portal>
             <Pressable style={styles.btnCalendario} onPress={abrirModal}>
-                <Text style={styles.txt24sb} placeholder='opa'>{selected.split('-').reverse().join('/')}</Text>
+                <Text style={styles.txt24sb}>{selected.split('-').reverse().join('/')}</Text>
             </Pressable>
         </View>
     )
