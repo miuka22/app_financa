@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         width: 350,
     },
     btnCalendario: {
+        borderRadius:  11,
         height: 50,
         width: 350,
         backgroundColor: '#423880',

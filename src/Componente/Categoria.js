@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Pressable, Image } from "react-native"
 import { Portal, Modal } from "react-native-paper"
 
 function Categoria() {
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
     const abrirModal = ()=> setVisible(true)
     const fecharModal = ()=> setVisible(false)
     const [loaded] = useFonts({
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
         width: 30,
     },
     btnCategoria: {
+        borderRadius:  11,
         height: 50,
         width: 350,
         backgroundColor: '#423880',
@@ -82,5 +83,4 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSansProSemiBold',
     },
 })
-
 export { Categoria }
