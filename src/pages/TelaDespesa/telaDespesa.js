@@ -17,9 +17,6 @@ function TelaPrincipal({ navigation }) {
     })
     const [value, setValue] = useState(0);
     const {height, width} = useWindowDimensions();
-    const adicionar = () => {
-        navigation.navigate('TelaPrincipal')
-    }
 
     if (!loaded) {
         return null
@@ -59,12 +56,9 @@ function TelaPrincipal({ navigation }) {
                 </View>
             </View>
             <View style={styles.form}>
-                <View style={styles.componentesExprt}>
-                    <Calendario/>
-                    <Categoria/>
-                </View>
-                <Pressable onPress={adicionar} style={styles.btnAdicionar}><Text style={styles.txt20bk}>
-                ADICIONAR</Text></Pressable>
+                <Calendario/>
+                <Categoria/>
+                <Pressable><Text>ADICIONAR</Text></Pressable>
             </View>
             <BarraInferiorDespesa/>
         </View>
@@ -72,23 +66,8 @@ function TelaPrincipal({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    componentesExprt: {
-        height: 150,
-        justifyContent: 'space-between',
-    },
-    btnAdicionar: {
-        borderRadius:  11,
-        height: 50,
-        width: 250,
-        backgroundColor: '#423880',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     form: {
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 50,
-        flex: 1,
+        alignItems: 'center'
     },
     barraSuperior: {
         backgroundColor: '#423880',
@@ -114,12 +93,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontFamily: 'SourceSansProBlack',
         alignItems: 'baseline'
-    },
-    txt20bk: {
-        color: '#FFFFFF',
-        fontSize: 20,
-        fontFamily: 'SourceSansProBlack',
-        alignItems: 'baseline',
     },
     txt12b: {
         color: '#FFFFFF',
