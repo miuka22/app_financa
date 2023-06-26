@@ -92,6 +92,7 @@ LocaleConfig.defaultLocale = 'br';
 
 const styles = StyleSheet.create({
     btnCalendario: {
+        borderRadius:  11,
         height: 50,
         width: 350,
         backgroundColor: '#423880',
