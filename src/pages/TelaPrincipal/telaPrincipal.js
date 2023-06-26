@@ -3,6 +3,7 @@ import { Text, View, Image, StyleSheet, Pressable, Animated } from "react-native
 import { useFonts } from 'expo-font'
 import { BarraInferiorPrincipal } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
+import { USER } from '../../DATA/usuario'
 
 function TelaPrincipal({ navigation }) {
     const [loaded] = useFonts({
@@ -26,11 +27,12 @@ function TelaPrincipal({ navigation }) {
                         style={styles.iconPerfil}
                         ></Image>
                     <Text style={styles.txt24sb}>
-                        Olá, Emily
+                        Olá, {USER.nome.primeiroNome}
                     </Text>
                     </View>
                     <MenuSup/>
                 </View>
+                <View style={styles.flatlistConteiner}></View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
                         Saldo em conta
@@ -46,6 +48,10 @@ function TelaPrincipal({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+    flatlistConteiner: {
+        backgroundColor: '#505050',
+        flex: 1
+    },
     perfil: {
         flexDirection:'row'
     },
