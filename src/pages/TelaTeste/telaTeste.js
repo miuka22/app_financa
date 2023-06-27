@@ -1,23 +1,25 @@
 import React, {useState} from 'react';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 import { Text } from 'react-native';
+import { FlatList } from 'react-native';
+import { USER } from '../../DATA/usuario';
+
 
 
 const TelaTeste = () => {
-  const [selected, setSelected] = useState('');
-
+  const dataJSON = USER.historico
+  const data = Object.values(dataJSON)
+  console.log(data)
+  const renderItem = ({ item }) => (
+    <Text>{item.valor}</Text>
+  );
   return (<>
-    <Calendar
-      onDayPress={day => {
-        setSelected(day.dateString);
-      }}
-      current={'2012-03-01'}
-      markedDates={{
-        [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
-      }}
+    <Text>{`${data}`}</Text>
+    <FlatList
+      data={data}
+      renderItem={renderItem}
       />
-      <Text>aqui? {selected}</Text>
-      </>
+    </>
   );
 };
 

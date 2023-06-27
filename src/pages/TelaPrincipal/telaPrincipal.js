@@ -1,11 +1,12 @@
 
-import { Text, View, Image, StyleSheet, Pressable, Animated } from "react-native"
+import { Text, View, Image, StyleSheet, FlatList, Animated } from "react-native"
 import { useFonts } from 'expo-font'
 import { BarraInferiorPrincipal } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
 import { USER } from "../../DATA/usuario"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
+import { List, Avatar } from 'react-native-paper';
 
 function TelaPrincipal({ navigation }) {
     const [loaded] = useFonts({
@@ -14,15 +15,17 @@ function TelaPrincipal({ navigation }) {
         SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
         SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
+    const [ historico, setHistorico ] = useState([])
+    const userData = Object.values(USER.historico)
 
     useEffect( () => {
-       (async () => {
-        const {data:historico} = await axios.get('http://localhost:3000/despesas'
-       ).then((res) => res)
-       console.log(historico)
+        (async () => {
+        const {data:HISTORICO} = await axios.get('http://localhost:3000/despesas'
+        ).then((res) => res)
+        setHistorico(HISTORICO)
     })() 
     },[])
-    
+
     if (!loaded) {
         return null
     }
@@ -37,7 +40,7 @@ function TelaPrincipal({ navigation }) {
                         style={styles.iconPerfil}
                         ></Image>
                     <Text style={styles.txt24sb}>
-                        Olá, {USER.usuario.primeiroNome}
+                        Olá, {`${historico[1]?.dataDespesa} ${USER.historico[2].valor}`}
                     </Text>
                     </View>
                     <MenuSup/>
@@ -52,12 +55,18 @@ function TelaPrincipal({ navigation }) {
                 </View>
             </View>
             <View style={styles.flatlistContainer}>
-                <View style={styles.historico}>
+                <View style={styles.historicoList}>
                     <View style={styles.flatlistCabecalho}>
                         <Text style={styles.txt26b}>Histórico da conta</Text>
                     </View>
                     <View style={styles.historicoItem}>
-
+                        <FlatList
+                            data={userData}
+                            renderItem={({item}) => <Item
+                                data={item.data}
+                                categoria={item.categoria}
+                            />}
+                        />
                     </View>
                 </View>
             </View>
@@ -66,7 +75,20 @@ function TelaPrincipal({ navigation }) {
     )
 }
 
+const Item = ({valor, categoria, data}) => (
+    <List.Item 
+        style={styles.listaContainer}
+        title={data}
+        description={categoria}
+    />
+);
+
 const styles = StyleSheet.create({
+    listaContainer: {
+        //backgroundColor: '#404040',
+        width: 350,
+        height:50,
+    },
     flatlistContainer: {
         paddingTop: 50,
         flex: 1,
@@ -82,7 +104,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#423880',
         borderBottomWidth: 1,
     },
-    historico: {
+    historicoList: {
         width: 350,
         flex:1, 
         //backgroundColor: '#202020',
