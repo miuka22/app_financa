@@ -7,7 +7,7 @@ import {Calendar, LocaleConfig} from 'react-native-calendars';
 
 function Calendario() {
     const navigation = useNavigation()
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
 
     const [loaded] = useFonts({
         SourceSansProSemiBold: require('../../assets/fonts/SourceSansPro-SemiBold.ttf'),
@@ -37,25 +37,26 @@ function Calendario() {
                     onDismiss={fecharModal}
                     style={styles.menuModal}
                 >
-                    <View style={styles.calendario}>
-                        <Calendar
-                            onDayPress={day => {
-                                setSelected(day.dateString)
-                                fecharModal()
+                    <View style={styles.conteiner}>
+                        <View style={styles.calendario}>
+                            <Calendar
+                                onDayPress={day => {
+                                    setSelected(day.dateString)
+                                }}
+                            markedDates={{
+                                [selected]: {selected: true, disableTouchEvent: true, selectedColor: '#423880'}
                             }}
-                        markedDates={{
-                            [selected]: {selected: true, disableTouchEvent: true, selectedColor: '#423880'}
-                        }}
-                        headerStyle={{
-                            width: 350,
-                        }}
-                        theme={{
-                            calendarBackground: '#FFFFFF',
-                            selectedDayTextColor: '#FFFFFF',
-                            todayTextColor: '#6252BA',
-                            textDisabledColor: '#C1C1C1',
-                        }}
-                        />
+                            theme={{
+                                calendarBackground: '#FFFFFF',
+                                selectedDayTextColor: '#FFFFFF',
+                                todayTextColor: '#6252BA',
+                                textDisabledColor: '#C1C1C1',
+                            }}
+                            />
+                        </View>
+                        <View style={styles.localBotoes}>
+
+                        </View>
                     </View>
                 </Modal>
             </Portal>
@@ -91,6 +92,10 @@ LocaleConfig.locales['br'] = {
 LocaleConfig.defaultLocale = 'br';
 
 const styles = StyleSheet.create({
+    calendario: {
+        backgroundColor: '#303030',
+        width: 350,
+    },
     btnCalendario: {
         borderRadius:  11,
         height: 50,
@@ -120,6 +125,12 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 24,
         fontFamily: 'SourceSansProSemiBold',
+    },
+    conteiner: {
+        height: 450,
+        width: 350,
+        backgroundColor: '#505050',
+        alignItems: 'center',
     },
 })
 

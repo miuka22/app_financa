@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 function rota(){
 
 return(
-    <Stack.Navigator initialRouteName='TelaDespesa'
+    <Stack.Navigator initialRouteName='TelaPrincipal'
         screenOptions={{
             animation: 'none'
         }}
