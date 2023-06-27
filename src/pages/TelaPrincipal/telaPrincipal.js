@@ -65,6 +65,7 @@ function TelaPrincipal({ navigation }) {
                             renderItem={({item}) => <Item
                                 data={item.data}
                                 categoria={item.categoria}
+                                valor={item.valor.toFixed(2)}
                             />}
                         />
                     </View>
@@ -80,10 +81,23 @@ const Item = ({valor, categoria, data}) => (
         style={styles.listaContainer}
         title={data}
         description={categoria}
+
+        left={()=><Avatar.Image
+            size={30}
+            source={require('../../../assets/despesa.png')}
+            style={styles.avatarDespesa}
+        />}
+
+        right={()=><Text>R$ -{valor}</Text> }
     />
 );
 
 const styles = StyleSheet.create({
+    avatarDespesa: {
+        height:30,
+        width: 30,
+        backgroundColor: '#FFFFFF00',
+    },
     listaContainer: {
         //backgroundColor: '#404040',
         width: 350,
@@ -106,6 +120,7 @@ const styles = StyleSheet.create({
     },
     historicoList: {
         width: 350,
+        height: 360,
         flex:1, 
         //backgroundColor: '#202020',
         justifyContent: 'flex-start',
