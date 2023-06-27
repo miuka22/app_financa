@@ -15,7 +15,7 @@ function MenuSup() {
         fecharModal()
     }
     const btnPerfil = () => {
-        navigation.navigate('testes')
+        navigation.navigate('TelaPerfil')
         fecharModal()
     }
     const btnTermosDeUso = () => {

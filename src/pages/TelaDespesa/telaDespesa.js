@@ -8,19 +8,42 @@ import { Categoria } from "../../Componente/Categoria"
 import { useState } from "react"
 import CurrencyInput from 'react-native-currency-input';
 
-function TelaPrincipal({ navigation }) {
+function TelaDespesas({ navigation }) {
     const [loaded] = useFonts({
         SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
         SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
         SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
         SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
-    const [value, setValue] = useState(0);
     const {height, width} = useWindowDimensions();
     const adicionar = () => {
         navigation.navigate('TelaPrincipal')
     }
+    const urlDev = "http://localhost:3000"
+    const urlProduct = "https://api-backend-bd-tarde.onrender.com"
+    
+    
+    const [valorD,setValue]=useState("")
+    ///const [value, setValue] = useState('');
+    //const [categoria, setCategoria] = useState("");
+    console.log(valorD)
 
+    //console.log(categoria)
+
+    const load = async () => {
+        const result = await fetch(`${urlProduct}/despesas`,
+          {
+            method: "POST",
+            headers: {
+            valorDespesas: valorD,
+           /// categoria: categoria
+            },
+          }
+    
+        ).then(res => res)
+        const despesasResult = await result.json()
+        console.log('despesasResult',despesasResult)
+        }
     if (!loaded) {
         return null
     }
@@ -47,7 +70,7 @@ function TelaPrincipal({ navigation }) {
                         <Text style={styles.txt28sb}>R$ </Text>
                         <CurrencyInput
                             style={styles.txt28sb}
-                            value={value}
+                            value={valorD}
                             onChangeValue={setValue}
                             delimiter="."
                             separator=","
@@ -63,7 +86,7 @@ function TelaPrincipal({ navigation }) {
                     <Calendario/>
                     <Categoria/>
                 </View>
-                <Pressable onPress={adicionar} style={styles.btnAdicionar}><Text style={styles.txt20bk}>
+                <Pressable onPress={()=>load} style={styles.btnAdicionar}><Text style={styles.txt20bk}>
                 ADICIONAR</Text></Pressable>
             </View>
             <BarraInferiorDespesa/>
@@ -150,4 +173,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default TelaPrincipal;
+export default TelaDespesas

@@ -7,6 +7,8 @@ import TelaReceita from "../pages/TelaReceita/telaReceita"
 import TelaDespesa from "../pages/TelaDespesa/telaDespesa"
 import TelaPerfil from "../pages/TelaPerfil/telaPerfil"
 import TelaTeste from "../pages/TelaTeste/telaTeste"
+import TelaEnviado from '../pages/TelaEsqueSenha/telaEnviado';
+
 
 const Stack = createNativeStackNavigator();
 function rota(){
@@ -55,6 +57,11 @@ return(
             name="TelaPerfil"
             component={TelaPerfil}
             options={{headerShown:false}}
+        />
+        <Stack.Screen
+        name="TelaEnviado"
+        component={TelaEnviado}
+        options={{headerShown:false}}
         />
     </Stack.Navigator>
 ) 

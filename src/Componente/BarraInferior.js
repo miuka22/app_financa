@@ -8,7 +8,7 @@ function BarraInferiorPrincipal() {
         <View style={styles.barraInferior}>
             <Pressable style={styles.botaoNav}>
                 <Image
-                    source={require('../../assets/homeOn.png')}
+                    source={require('../../assets/homeOff.png')}
                     style={styles.iconInferior}
                 />
                 <Text style={styles.txt12b}>Principal</Text>

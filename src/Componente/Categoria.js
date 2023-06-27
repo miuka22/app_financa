@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font'
 import { View, Text, StyleSheet, Pressable, Image } from "react-native"
 import { Portal, Modal } from "react-native-paper"
 
+
 function Categoria() {
     const [visible, setVisible] = useState(false)
     const abrirModal = ()=> setVisible(true)
@@ -19,6 +20,8 @@ function Categoria() {
         fecharModal()
     }
     const [catSelecionada, setCatSelecionada] = useState('Categoria')
+    const [categoria, setCategoria] = useState("");
+
     if (!loaded) {
         return null
     }
