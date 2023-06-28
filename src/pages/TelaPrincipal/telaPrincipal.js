@@ -16,16 +16,19 @@ function TelaPrincipal({ navigation }) {
         SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
     const [ historico, setHistorico ] = useState([])
-    const userData = Object.values(USER.historico)
-
+    const userData = Object.values(historico)
+    const [ valorTotal, setValorTotal ] = useState(0)
+    
     useEffect( () => {
         (async () => {
-        const {data:HISTORICO} = await axios.get('http://localhost:3000/despesas'
-        ).then((res) => res)
-        setHistorico(HISTORICO)
-    })() 
-    },[])
+            const {data} = await axios.get('http://localhost:3000/despesas/').then((res) => res)
 
+            console.log(data.length)
+            const acumulador = data.reduce((total, despesa) => total - despesa.valorDespesas, 0)
+            setValorTotal(acumulador)
+            setHistorico(data)
+        })()
+    },[])
     if (!loaded) {
         return null
     }
@@ -40,7 +43,7 @@ function TelaPrincipal({ navigation }) {
                         style={styles.iconPerfil}
                         ></Image>
                     <Text style={styles.txt24sb}>
-                        Olá, {`${historico[1]?.dataDespesa} ${USER.historico[2].valor}`}
+                        Olá, Emily
                     </Text>
                     </View>
                     <MenuSup/>
@@ -50,7 +53,7 @@ function TelaPrincipal({ navigation }) {
                         Saldo em conta
                     </Text>
                     <Text style={styles.txt28sb}>
-                        R$: 205,11
+                        R$: {valorTotal}
                     </Text>
                 </View>
             </View>
@@ -63,9 +66,9 @@ function TelaPrincipal({ navigation }) {
                         <FlatList
                             data={userData}
                             renderItem={({item}) => <Item
-                                data={item.data}
+                                data={item.dataDespesa}
                                 categoria={item.categoria}
-                                valor={item.valor.toFixed(2)}
+                                valor={item.valorDespesas}
                             />}
                         />
                     </View>
@@ -77,9 +80,11 @@ function TelaPrincipal({ navigation }) {
 }
 
 const Item = ({valor, categoria, data}) => (
-    <List.Item 
-        style={styles.listaContainer}
+    <View style={styles.listaConteiner}><List.Item 
+        style={styles.lista}
+        titleStyle={styles.dataLista}
         title={data}
+        descriptionStyle={styles.descricaoLista}
         description={categoria}
 
         left={()=><Avatar.Image
@@ -88,20 +93,39 @@ const Item = ({valor, categoria, data}) => (
             style={styles.avatarDespesa}
         />}
 
-        right={()=><Text>R$ -{valor}</Text> }
-    />
+        right={()=><Text style={styles.valorLista}>R$ -{valor}</Text> }
+    /></View>
 );
 
 const styles = StyleSheet.create({
+    valorLista: {
+        color: '#DD0000',
+        fontSize: 20,
+        fontFamily: 'SourceSansProSemiBold',
+    },
+    descricaoLista: {
+        color: '#000000',
+        fontSize: 18,
+        fontFamily: 'SourceSansProSemiBold',
+    },
+    dataLista: {
+        color: '#000000',
+        fontSize: 16,
+        fontFamily: 'SourceSansProRegular',
+        alignItems: 'baseline'
+    },
     avatarDespesa: {
-        height:30,
-        width: 30,
         backgroundColor: '#FFFFFF00',
     },
-    listaContainer: {
+    listaConteiner: {
+    },
+    lista: {
         //backgroundColor: '#404040',
+        borderBottomWidth: 1,
+        borderBottomColor: '#423880',
         width: 350,
         height:50,
+        justifyContent: 'center',
     },
     flatlistContainer: {
         paddingTop: 50,
@@ -124,6 +148,7 @@ const styles = StyleSheet.create({
         flex:1, 
         //backgroundColor: '#202020',
         justifyContent: 'flex-start',
+        bottom: 50
     },
     perfil: {
         flexDirection:'row'
