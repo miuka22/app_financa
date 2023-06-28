@@ -21,7 +21,7 @@ function TelaPrincipal({ navigation }) {
     
     useEffect( () => {
         (async () => {
-            const {data} = await axios.get('http://localhost:3000/despesas/').then((res) => res)
+            const {data} = await axios.get('https://api-backend-bd-tarde.onrender.com/despesas/').then((res) => res)
 
             console.log(data.length)
             const acumulador = data.reduce((total, despesa) => total - despesa.valorDespesas, 0)

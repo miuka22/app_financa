@@ -21,7 +21,7 @@ function Calendario() {
     } else {
         return(`${new Date().getMonth()+1}`)
     }}
-
+    
     const [selected, setSelected] = useState(`${new Date().getDate()}/${mes()}/${new Date().getFullYear()}`);
 
     if (!loaded) {
@@ -42,6 +42,7 @@ function Calendario() {
                             <Calendar
                                 onDayPress={day => {
                                     setSelected(day.dateString)
+                                    fecharModal()
                                 }}
                             markedDates={{
                                 [selected]: {selected: true, disableTouchEvent: true, selectedColor: '#423880'}
@@ -92,6 +93,9 @@ LocaleConfig.locales['br'] = {
 LocaleConfig.defaultLocale = 'br';
 
 const styles = StyleSheet.create({
+    localBotoes: {
+        backgroundColor: "#423880",
+    },
     calendario: {
         backgroundColor: '#303030',
         width: 350,
@@ -127,7 +131,6 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSansProSemiBold',
     },
     conteiner: {
-        height: 450,
         width: 350,
         backgroundColor: '#505050',
         alignItems: 'center',
