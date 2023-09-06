@@ -53,8 +53,9 @@ const style =StyleSheet.create({
         color:'#423880'
     },
     criarConta:{
-        
-        //width: 306,
+        color: '#ffffff',
+        marginTop: 8
+        // width: 306,
         ///height: 50,
         //paddingLeft:210,
         ///textAlign: 'center',
