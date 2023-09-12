@@ -13,10 +13,14 @@ function TelaLogin({navigation}) {
   const [senha ,setSenha]= useState('')
   
   async function buscarLogin(){
-    await axios.post('http://10.220.30.161:7878/buscar/', {
-      email: 'teste@teste',
-      senha: 'teste'
+    const response = await axios.post('http://10.220.30.22:7878/entrar/', {
+      email: email,
+      senha: senha
     })
+    console.log(response.data)
+    if (response.data.retorno == 'correto') {
+      navigation.navigate('TelaPrincipal')
+    }
   }
 
     return (
@@ -38,13 +42,15 @@ function TelaLogin({navigation}) {
                 placeholderTextColor={'#000000'}
                 style={styles.textForm}
                 placeholder="Email"
-                onChange={text=>
+                inputMode='email'
+                onChangeText={text=>
                 setEmail(text)}/>
             <TextInput
                 placeholderTextColor={'#000000'}
                 style={styles.textForm}
                 placeholder="Senha"
-                onChange={text=>
+                inputMode='text' 
+                onChangeText={text=>
                 setSenha(text)}/>
 
         <TouchableOpacity onPress={()=>navigation.navigate('TelaEsqueceu')}>

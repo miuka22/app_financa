@@ -1,11 +1,23 @@
 import { useState } from 'react';
-import {View,Text,TextInput,StyleSheet} from 'react-native';
+import {View,Text,TextInput,StyleSheet, Pressable} from 'react-native';
 import styles from '../../Styles/stylesTelaCadastro';
+import axios from 'axios'
+
 function TelaCadastro() {
-  const [nameUsuario,setnameUsuario]=useState('')
+  const [nomeUsuario,setnameUsuario]=useState('')
   const [email,setEmail]= useState ('')
   const [senha,setSenha]= useState ('')
   const [repitirSenha,setRepitirSenha]= useState ('')
+
+  async function validarCadastro(){
+    const response = await axios.post('http://10.220.30.22:7878/cadastrar/', {
+      email: email,
+      nome: nomeUsuario,
+      senha: senha,
+      termo: true
+    })
+    console.log(response);
+  }
 
   return (
 
@@ -20,30 +32,33 @@ function TelaCadastro() {
        <TextInput
        style={styles.TextInput}
        placeholder='nome do usuario'
-       onChange={text=>
-        setnameUsuario(nameUsuario)}
+       onChangeText={text=>
+        setnameUsuario(text)}
        />
           <Text style={styles.formTxt}>E-mail</Text>
        <TextInput
        style={styles.TextInput}
        placeholder='Email'
-       onChange={text=>
-        setEmail(email)}
+       onChangeText={text=>
+        setEmail(text)}
         />
           <Text style={styles.formTxt}>Senha</Text>
        <TextInput
        style={styles.TextInput}
        placeholder='Senha'
-       onChange={text=>
-        setSenha(senha)}
+       onChangeText={text=>
+        setSenha(text)}
         />
            <Text style={styles.formTxt}>Confirme a senha</Text>
        <TextInput
        style={styles.TextInput}
        placeholder='Confirme a senha'
-       onChange={text=>
-        setRepitirSenha(repitirSenha)}
+       onChangeText={text=>
+        setRepitirSenha(text)}
         />
+        <Pressable
+          onPress={validarCadastro}
+        ><Text>VALIDAR</Text></Pressable>
           
       </View>
       </View>
