@@ -3,7 +3,6 @@ import { Text, View, Image, StyleSheet, FlatList, Animated } from "react-native"
 import { useFonts } from 'expo-font'
 import { BarraInferiorPrincipal } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
-import { USER } from "../../DATA/usuario"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { List, Avatar } from 'react-native-paper';

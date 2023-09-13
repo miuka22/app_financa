@@ -1,28 +1,50 @@
 import { StyleSheet } from "react-native";
 const style = StyleSheet.create({
     Conteiner:{
-        flex:2,
-        alignContent:'center',
+        height: '100%',
+        alignItems:'center',
         backgroundColor:'#423880',
-      
       },
-      barraSuperior:{
-        backgroundColor:'#BBB2F0',
-        height: 100,
-        padding:10,
-        alignItems:'flex-start',
+      areaCheck:{
+        flexDirection: 'row',
+        width: 350,
+        marginTop: 15,
+        alignItems: 'center'
+      },
+      check:{
+        width: 20,
+        height: 20,
+        backgroundColor: '#423880',
+        padding: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      Logo:{
+        alignItems:'center',
+        justifyContent: 'center',
+        marginTop:40
+      },
+      LogoTitle:{
+        color:'#ffff',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        fontSize:43,
       },
       textTitle:{
-      
+        color:'#ffff',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        fontSize:32,
       },
       form:{
+        // backgroundColor:'#000',
+        marginVertical: 50,
         alignItems:'center',
         justifyContent:'center',
-        flex:1,
-        marginBottom:250,
-        paddingHorizontal:12, 
       },
       formTxt:{
+        color: '#ffffff',
+        fontSize: 20,
         width: 350,
         padding:5,
         paddingHorizontal:12
@@ -35,8 +57,6 @@ const style = StyleSheet.create({
         marginVertical: 5,
         borderRadius: 11,
         padding: 12,
-        alignContent:'center',
-      
       }
 })
 export default style;

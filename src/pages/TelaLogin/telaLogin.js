@@ -11,15 +11,19 @@ function TelaLogin({navigation}) {
   const {height, width} = useWindowDimensions();
   const [email, setEmail]= useState('')
   const [senha ,setSenha]= useState('')
+  const [aviso ,setAviso]= useState('')
   
   async function buscarLogin(){
-    const response = await axios.post('http://10.220.30.22:7878/entrar/', {
+    const response = await axios.post('http://192.168.0.117:7878/entrar/', {
       email: email,
       senha: senha
     })
     console.log(response.data)
     if (response.data.retorno == 'correto') {
-      navigation.navigate('TelaPrincipal')
+      // navigation.navigate('TelaPrincipal')
+      setAviso('')
+    } else {
+      setAviso('Email e/ou senha incorreto(s)')
     }
   }
 
@@ -36,6 +40,9 @@ function TelaLogin({navigation}) {
     <View style={styles.Logo}>
         <Text style={styles.LogoTitle}>MONEY MIND</Text>
     </View>
+        <Text style={styles.Aviso}>
+            {aviso}
+        </Text>
 
         <View style={styles.TextInput} > 
             <TextInput
@@ -57,7 +64,6 @@ function TelaLogin({navigation}) {
         <Text style={styles.btRecuSenha}>recuperar senha</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btEntrar} onPress={
-        // ()=>navigation.navigate('TelaPrincipal')
         buscarLogin
       }>
         <Text style={styles.Entrar}>Entrar</Text>

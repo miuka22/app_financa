@@ -1,7 +1,9 @@
 import {StyleSheet} from "react-native";
 const style =StyleSheet.create({
+    Aviso:{
+        color:'#ee0000'
+    },
     Logo:{
-    
         alignItems:'center',
         justifyContent: 'center',
     },
@@ -12,14 +14,13 @@ const style =StyleSheet.create({
         fontSize:43,
         marginVertical:20
     },
-   
     TextInput:{
         alignItems: 'center',
         justifyContent: 'center',
     },
     textForm:{
         ///estilo do campos de texto
-        width: 300,
+        width: 350,
         height: 50,
         fontSize: 16,
         backgroundColor: '#BAB2ED',
@@ -45,7 +46,6 @@ const style =StyleSheet.create({
         borderRadius:11,
         justifyContent:'center',
         alignItems:'center'
-    
     },
     Entrar:{
         fontSize:22,
@@ -54,7 +54,7 @@ const style =StyleSheet.create({
     },
     criarConta:{
         color: '#ffffff',
-        marginTop: 8
+        marginTop: 8,
         // width: 306,
         ///height: 50,
         //paddingLeft:210,
@@ -62,7 +62,7 @@ const style =StyleSheet.create({
        //marginVertical:12
         ///fontStyle: 'normal',
         ///fontWeight: 400,
-        ///fontSize: 16,
+        fontSize: 20,
         //lineHeight: 20,
     }
 
