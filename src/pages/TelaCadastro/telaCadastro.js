@@ -7,13 +7,27 @@ import Termo from '../../Componente/TermoDeUso'
 
 
 function TelaCadastro() {
-  const [nomeUsuario,setnameUsuario]=useState('')
+  const [nomeUsuario,setNomeUsuario]=useState('')
   const [email,setEmail]= useState ('')
   const [senha,setSenha]= useState ('')
   const [repitirSenha,setRepitirSenha]= useState ('')
-  const [termo,setTermo]= useState(false)
 
-  async function validarCadastro(){
+  const [nomeAviso, setNomeAviso] = useState('')
+  const [emailAviso, setEmailAviso] = useState('')
+  const [senhaAviso, setSenhaAviso] = useState('')
+  const [repSenhaAviso, setRepSenhaAviso] = useState('')
+
+  const [termo,setTermo]= useState(false)
+  const [modal, setModal] = useState(false)
+
+  function checkForm() {
+  nomeUsuario == '' ? setNomeAviso(<Text style={styles.aviso}>Insira um nome válido</Text>) : setNomeAviso('')
+  email == '' ? setEmailAviso(<Text style={styles.aviso}>Inseri</Text>) : setEmailAviso('')
+  senha == ''? setSenhaAviso(<Text style={styles.aviso}>Insira uma senha</Text>) : setSenhaAviso('')
+  repitirSenha == ''? setRepSenhaAviso(<Text style={styles.aviso}>Insira a senha novamente</Text>) : setRepSenhaAviso('')
+  }
+
+  async function validarCadastro(){ 
     // const response = await axios.post('http://192.168.0.117:7878/cadastrar/', {
     //   email: email,
     //   nome: nomeUsuario,
@@ -32,15 +46,15 @@ function TelaCadastro() {
     </View>
       
       <View style={styles.form}>
-        <Text style={styles.formTxt}>Nome completo</Text>
+        <Text style={styles.formTxt}>Nome completo {nomeAviso}</Text>
        <TextInput
        placeholderTextColor={'#000000'}
        style={styles.TextInput}
        placeholder='nome completo'
        onChangeText={text=>
-        setnameUsuario(text)}
+        setNomeUsuario(text)}
        />
-          <Text style={styles.formTxt}>E-mail</Text>
+          <Text style={styles.formTxt}>E-mail {emailAviso}</Text>
        <TextInput
        placeholderTextColor={'#000000'}
        style={styles.TextInput}
@@ -48,7 +62,7 @@ function TelaCadastro() {
        onChangeText={text=>
         setEmail(text)}
         />
-          <Text style={styles.formTxt}>Senha</Text>
+          <Text style={styles.formTxt}>Senha {senhaAviso}</Text>
        <TextInput
        placeholderTextColor={'#000000'}
        style={styles.TextInput}
@@ -56,7 +70,7 @@ function TelaCadastro() {
        onChangeText={text=>
         setSenha(text)}
         />
-           <Text style={styles.formTxt}>Confirme a senha</Text>
+           <Text style={styles.formTxt}>Confirme a senha {repSenhaAviso}</Text>
        <TextInput
        placeholderTextColor={'#000000'}
        style={styles.TextInput}
@@ -73,11 +87,19 @@ function TelaCadastro() {
             checkedColor='#ffffff'
             containerStyle={styles.check}
           />
-          <Termo/>
+          <Termo setVisibleProps={modal} setModalProps={setModal}/>
+
+        <Pressable onPress={() => {setModal(true)}}>
+           <Text style={styles.formTxt}>Eu li e aceito os termos de uso
+           </Text>
+        </Pressable>
         </View>
         <Pressable
-          onPress={validarCadastro}
-        ><Text>VALIDAR</Text></Pressable>
+          onPress={checkForm}
+          style={styles.btnCadastrar}
+        >
+          <Text style={styles.cadastrar}>Cadastrar</Text>
+        </Pressable>
           
       </View>
     </View>

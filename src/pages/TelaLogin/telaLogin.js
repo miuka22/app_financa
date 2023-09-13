@@ -14,7 +14,8 @@ function TelaLogin({navigation}) {
   const [aviso ,setAviso]= useState('')
   
   async function buscarLogin(){
-    const response = await axios.post('http://192.168.0.117:7878/entrar/', {
+    // const response = await axios.post('http://192.168.0.117:7878/entrar/', {
+    const response = await axios.post('http://10.220.30.90:7878/entrar/', {
       email: email,
       senha: senha
     })

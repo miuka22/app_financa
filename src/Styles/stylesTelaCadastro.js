@@ -5,6 +5,24 @@ const style = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#423880',
       },
+      aviso:{
+        fontSize:16,
+        color:'#ee0000'
+      },
+      cadastrar:{
+        color: '#423880',
+        fontWeight: 'bold',
+        fontSize: 22,
+      },
+      btnCadastrar:{
+        width: 150,
+        height: 50,
+        backgroundColor: '#ffffff',
+        borderRadius: 11,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+      },
       areaCheck:{
         flexDirection: 'row',
         width: 350,
