@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 const style = StyleSheet.create({
+    teste:{
+      backgroundColor: '#000000'
+    },
     Conteiner:{
         height: '100%',
         alignItems:'center',
