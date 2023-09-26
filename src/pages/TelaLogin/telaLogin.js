@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { useWindowDimensions } from 'react-native';
+import { View, Text, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { api } from '../../api'
 import styles from '../../Styles/stylesTelaLogin'
 
 
 function TelaLogin({ navigation }) {
+  const [senhaView, setSenhaView] = useState(true)
 
-  const { height, width } = useWindowDimensions();
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [aviso, setAviso] = useState('')
@@ -57,8 +56,16 @@ function TelaLogin({ navigation }) {
           style={styles.textForm}
           placeholder="Senha"
           inputMode='text'
+          secureTextEntry={senhaView}
           onChangeText={text =>
             setSenha(text)} />
+
+        <Pressable style={styles.viewExibirOcultar}
+          onPress={() => setSenhaView(!senhaView)}>
+          <Text style={styles.exibirOcultar}>{
+            senhaView ? 'MOSTRAR SENHA' : 'OCULTAR SENHA'
+          }</Text>
+        </Pressable>
 
         <TouchableOpacity onPress={() => navigation.navigate('TelaEsqueceu')}>
           <Text style={styles.btRecuSenha}>recuperar senha</Text>

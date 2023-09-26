@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, Platform } from 'react-native';
+import { View, Text, TextInput, Pressable } from 'react-native';
 import styles from '../../Styles/stylesTelaCadastro';
-import api from '../../api'
+import { api } from '../../api'
 import { CheckBox } from '@rneui/themed';
 import Termo from '../../Componente/TermoDeUso'
 
-function TelaCadastro() {
+function TelaCadastro({ navigation }) {
+  const [senhaView, setSenhaView] = useState(true)
+
   const [nomeUsuario, setNomeUsuario] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-  const [repitirSenha, setRepitirSenha] = useState('')
 
   const [termoAviso, setTermoAviso] = useState('')
   const [nomeAviso, setNomeAviso] = useState('')
   const [emailAviso, setEmailAviso] = useState('')
   const [senhaAviso, setSenhaAviso] = useState('')
-  const [repSenhaAviso, setRepSenhaAviso] = useState('')
 
   const [termo, setTermo] = useState(false)
   const [modal, setModal] = useState(false)
@@ -24,18 +24,24 @@ function TelaCadastro() {
     nomeUsuario == '' ? setNomeAviso(<Text style={styles.aviso}>Insira um nome válido</Text>) : setNomeAviso('')
     email == '' ? setEmailAviso(<Text style={styles.aviso}>Insera um email válido</Text>) : setEmailAviso('')
     senha == '' ? setSenhaAviso(<Text style={styles.aviso}>Insira uma senha válida</Text>) : setSenhaAviso('')
-    repitirSenha == '' ? setRepSenhaAviso(<Text style={styles.aviso}>Insira a senha novamente</Text>) : setRepSenhaAviso('')
     termo == false ? setTermoAviso(<Text style={styles.aviso}>Aceite os termos de uso</Text>) : setTermoAviso('')
+
+    if (nomeUsuario !== '' && email !== '' && senha !== '' && termo !== false) {
+      validarCadastro()
+    }
   }
 
   async function validarCadastro() {
-    console.log('oia eu');
     const response = await api.post('cadastrar/', {
-      email: email,
       nome: nomeUsuario,
+      email: email,
       senha: senha,
       termo: termo
     })
+    console.log(response.data.retorno);
+    response.data.retorno === "cadastrado" ? setEmailAviso(
+      <Text style={styles.aviso}>Email já cadastrado</Text>
+    ) : setEmailAviso(''), navigation.navigate('TelaPrincipal')
   }
 
   return (
@@ -68,17 +74,16 @@ function TelaCadastro() {
           placeholderTextColor={'#000000'}
           style={styles.TextInput}
           placeholder='Senha'
+          secureTextEntry={senhaView}
           onChangeText={text =>
             setSenha(text)}
         />
-        <Text style={styles.formTxt}>Confirme a senha {repSenhaAviso}</Text>
-        <TextInput
-          placeholderTextColor={'#000000'}
-          style={styles.TextInput}
-          placeholder='Confirme a senha'
-          onChangeText={text =>
-            setRepitirSenha(text)}
-        />
+        <Pressable style={styles.viewExibirOcultar}
+          onPress={() => setSenhaView(!senhaView)}>
+          <Text style={styles.exibirOcultar}>{
+            senhaView ? 'MOSTRAR SENHA' : 'OCULTAR SENHA'
+          }</Text>
+        </Pressable>
         <View style={styles.areaCheck}>
           <CheckBox
             center
@@ -97,7 +102,7 @@ function TelaCadastro() {
         </View>
         <Text>{termoAviso}</Text>
         <Pressable
-          onPress={() => { validarCadastro() }}
+          onPress={() => { checkForm() }}
           style={styles.btnCadastrar}
         >
           <Text style={styles.cadastrar}>Cadastrar</Text>
