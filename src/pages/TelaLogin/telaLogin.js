@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { api } from '../../api'
 import styles from '../../Styles/stylesTelaLogin'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function TelaLogin({ navigation }) {
@@ -20,6 +21,7 @@ function TelaLogin({ navigation }) {
     console.log(response.data)
     if (response.data.retorno == 'correto') {
       navigation.navigate('TelaPrincipal')
+      await AsyncStorage.setItem("userData", JSON.stringify(response.data))
       setAviso('')
     } else {
       setAviso('Email e/ou senha incorreto(s)')
