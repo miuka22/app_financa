@@ -6,28 +6,33 @@ import { MenuSup } from '../../Componente/Menu'
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { List, Avatar } from 'react-native-paper';
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 function TelaPrincipal({ navigation }) {
+    const [dadosUsuarios, setDadosUsuarios] = useState('')
+    console.log('opa' + dadosUsuarios)
     const [loaded] = useFonts({
         SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
         SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
         SourceSansProSemiBold: require('../../../assets/fonts/SourceSansPro-SemiBold.ttf'),
         SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
-    const [ historico, setHistorico ] = useState([])
+    const [historico, setHistorico] = useState([])
     const userData = Object.values(historico)
-    const [ valorTotal, setValorTotal ] = useState(0)
-    
-    useEffect( () => {
+    const [valorTotal, setValorTotal] = useState(0)
+
+    useEffect(() => {
         (async () => {
-            const {data} = await axios.get('https://api-backend-bd-tarde.onrender.com/despesas/').then((res) => res)
+            const userData = await AsyncStorage.getItem("userData")
+            setDadosUsuarios(JSON.parse(userData))
+            const { data } = await axios.get('https://api-backend-bd-tarde.onrender.com/despesas/').then((res) => res)
 
             console.log(data.length)
             const acumulador = data.reduce((total, despesa) => total - despesa.valorDespesas, 0)
             setValorTotal(acumulador)
             setHistorico(data)
         })()
-    },[])
+    }, [])
     if (!loaded) {
         return null
     }
@@ -37,15 +42,15 @@ function TelaPrincipal({ navigation }) {
             <View style={styles.barraSuperior}>
                 <View style={styles.faixaUm}>
                     <View style={styles.perfil}>
-                    <Image
-                        source={require('../../../assets/iconPerfil.png')}
-                        style={styles.iconPerfil}
+                        <Image
+                            source={require('../../../assets/iconPerfil.png')}
+                            style={styles.iconPerfil}
                         ></Image>
-                    <Text style={styles.txt24sb}>
-                        Olá, Emily
-                    </Text>
+                        <Text style={styles.txt24sb}>
+                            Olá, {dadosUsuarios.userData?.nome}
+                        </Text>
                     </View>
-                    <MenuSup/>
+                    <MenuSup />
                 </View>
                 <View style={styles.saldo}>
                     <Text style={styles.txt25bk}>
@@ -64,7 +69,7 @@ function TelaPrincipal({ navigation }) {
                     <View style={styles.historicoItem}>
                         <FlatList
                             data={userData}
-                            renderItem={({item}) => <Item
+                            renderItem={({ item }) => <Item
                                 data={item.dataDespesa}
                                 categoria={item.categoria}
                                 valor={item.valorDespesas}
@@ -73,26 +78,26 @@ function TelaPrincipal({ navigation }) {
                     </View>
                 </View>
             </View>
-            <BarraInferiorPrincipal/>
+            <BarraInferiorPrincipal />
         </View>
     )
 }
 
-const Item = ({valor, categoria, data}) => (
-    <View style={styles.listaConteiner}><List.Item 
+const Item = ({ valor, categoria, data }) => (
+    <View style={styles.listaConteiner}><List.Item
         style={styles.lista}
         titleStyle={styles.dataLista}
         title={data}
         descriptionStyle={styles.descricaoLista}
         description={categoria}
 
-        left={()=><Avatar.Image
+        left={() => <Avatar.Image
             size={30}
             source={require('../../../assets/despesa.png')}
             style={styles.avatarDespesa}
         />}
 
-        right={()=><Text style={styles.valorLista}>R$ -{valor}</Text> }
+        right={() => <Text style={styles.valorLista}>R$ -{valor}</Text>}
     /></View>
 );
 
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#423880',
         width: 350,
-        height:50,
+        height: 50,
         justifyContent: 'center',
     },
     flatlistContainer: {
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
     },
-    flatlistCabecalho:{
+    flatlistCabecalho: {
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
@@ -144,13 +149,13 @@ const styles = StyleSheet.create({
     historicoList: {
         width: 350,
         height: 360,
-        flex:1, 
+        flex: 1,
         //backgroundColor: '#202020',
         justifyContent: 'flex-start',
         bottom: 50
     },
     perfil: {
-        flexDirection:'row'
+        flexDirection: 'row'
     },
     barraSuperior: {
         backgroundColor: '#423880',
@@ -161,7 +166,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 40,
         height: 50,
         flexDirection: 'row',
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
     },
     saldo: {
         height: 100,
