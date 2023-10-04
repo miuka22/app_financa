@@ -41,8 +41,8 @@ function MenuSup() {
                     </View>
                 </Modal>
             </Portal>
-            <Pressable onPress={abrirModal}>
-                <Image style={styles.menu} source={require('../../assets/menu.png')}/>
+            <Pressable style={{ padding: 10 }} onPress={abrirModal}>
+                <Image style={styles.menu} source={require('../../assets/menu.png')} />
             </Pressable>
         </View>
     )
@@ -50,14 +50,14 @@ function MenuSup() {
 
 const styles = StyleSheet.create({
     menuModal: {
-        justifyContent:'flex-start',
+        justifyContent: 'flex-start',
         alignItems: 'flex-end',
     },
     menuConteudo: {
         backgroundColor: '#9485EE',
-        width:139,
-        height:51,
-        alignItems:'flex-end',
+        width: 139,
+        height: 51,
+        alignItems: 'flex-end',
     },
     menuItem: {
         justifyContent: 'center',
