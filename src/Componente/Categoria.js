@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font'
 import { View, Text, StyleSheet, Pressable, Image } from "react-native"
 import { Portal, Modal } from "react-native-paper"
 
+var valorExportado
 
 function Categoria() {
     const [visible, setVisible] = useState(false)
@@ -20,7 +21,7 @@ function Categoria() {
         fecharModal()
     }
     const [catSelecionada, setCatSelecionada] = useState('Categoria')
-    const [categoria, setCategoria] = useState("");
+    valorExportado = catSelecionada
 
     if (!loaded) {
         return null
@@ -49,6 +50,10 @@ function Categoria() {
         </View>
     )
 
+}
+
+function categoriaExportada() {
+    return(valorExportado)
 }
 
 const styles = StyleSheet.create({
@@ -86,4 +91,4 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSansProSemiBold',
     },
 })
-export { Categoria }
+export { Categoria, categoriaExportada }

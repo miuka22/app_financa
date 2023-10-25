@@ -5,6 +5,8 @@ import { Portal, Modal } from "react-native-paper"
 import { useNavigation } from "@react-navigation/native"
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 
+var valorExportado
+
 function Calendario() {
     const navigation = useNavigation()
     const [visible, setVisible] = useState(false)
@@ -20,9 +22,10 @@ function Calendario() {
         return(`0${new Date().getMonth()+1}`)
     } else {
         return(`${new Date().getMonth()+1}`)
-    }}
-    
+    }}  
     const [selected, setSelected] = useState(`${new Date().getDate()}/${mes()}/${new Date().getFullYear()}`);
+    valorExportado = selected.split('-').reverse().join('/')
+
 
     if (!loaded) {
         return null
@@ -92,6 +95,10 @@ LocaleConfig.locales['br'] = {
 
 LocaleConfig.defaultLocale = 'br';
 
+function data() {
+    return(valorExportado)
+}
+
 const styles = StyleSheet.create({
     localBotoes: {
         backgroundColor: "#423880",
@@ -137,4 +144,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export { Calendario }
+export { Calendario, data }

@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 function rota(){
 
 return(
-    <Stack.Navigator initialRouteName='TelaPerfil'
+    <Stack.Navigator initialRouteName='TelaLogin'
         screenOptions={{
             animation: 'none'
         }}
