@@ -1,11 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useFonts } from 'expo-font'
 import { View, Text, StyleSheet, Pressable, Image } from "react-native"
 import { Portal, Modal } from "react-native-paper"
 
 var valorExportado
 
-function Categoria() {
+function Categoria({atualizarCat}) {
     const [visible, setVisible] = useState(false)
     const abrirModal = ()=> setVisible(true)
     const fecharModal = ()=> setVisible(false)
@@ -21,6 +21,9 @@ function Categoria() {
         fecharModal()
     }
     const [catSelecionada, setCatSelecionada] = useState('Categoria')
+    useEffect(() => {
+        atualizarCat(catSelecionada)
+    },[catSelecionada])
     valorExportado = catSelecionada
 
     if (!loaded) {

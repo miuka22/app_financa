@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useFonts } from 'expo-font'
 import { View, Text, StyleSheet, Pressable, Image } from "react-native"
 import { Portal, Modal } from "react-native-paper"
@@ -7,7 +7,7 @@ import {Calendar, LocaleConfig} from 'react-native-calendars';
 
 var valorExportado
 
-function Calendario() {
+function Calendario({atualizarData}) {
     const navigation = useNavigation()
     const [visible, setVisible] = useState(false)
 
@@ -24,8 +24,12 @@ function Calendario() {
         return(`${new Date().getMonth()+1}`)
     }}  
     const [selected, setSelected] = useState(`${new Date().getDate()}/${mes()}/${new Date().getFullYear()}`);
-    valorExportado = selected.split('-').reverse().join('/')
+    useEffect(() => {
+        atualizarData(selected)
+    },[selected])
 
+
+    valorExportado = selected.split('-').reverse().join('/')
 
     if (!loaded) {
         return null

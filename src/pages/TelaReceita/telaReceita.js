@@ -1,5 +1,5 @@
 
-import { Text, View, TextInput, Image, StyleSheet, Pressable, useWindowDimensions } from "react-native"
+import { Text, View, Alert, StyleSheet, Pressable, useWindowDimensions } from "react-native"
 import { useFonts } from 'expo-font'
 import { BarraInferiorDespesa, BarraInferiorReceita } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
@@ -18,17 +18,33 @@ function TelaReceita({ navigation }) {
     })
     const {height, width} = useWindowDimensions();
     const adicionar = () => {
+        setDataCalendario(data())
+        setCategoria(categoriaExportada())
 
-        setDataCalendario(data)
-        setCategoria(categoriaExportada)
-
-        if (categoria == '' || valorDinheiro == 0) {
-            alert("bom dia")
+        if (categoria == 'categoria' || valorDinheiro == 0 || valorDinheiro == null) {
+            Alert.alert('Money Mind', 'Insira valores válidos', [
+                {text: 'OK'},
+              ]);
+        } else {
+            console.log('chegou em else')
+            cadastrarReceita()
         }
-        // navigation.navigate('TelaPrincipal')
+
+        async function cadastrarReceita() {
+            const response = await api.post('cadastrar/dinheiroconta/',{
+                data: dataCalendario,
+                categoria: categoria,
+                valor: valorDinheiro,
+                tipo: 'receita'
+            })
+            console.log(response.data.retorno)
+            navigation.navigate('TelaPrincipal')
+        }
+        
         console.log(`VALOR: ${valorDinheiro}`)
         console.log(`DATA: ${dataCalendario}`)
         console.log(`CATEGORIA: ${categoria}`)
+        console.log(`=====================`)
     }
     
     const [valorDinheiro,setValorDinheiro]=useState("")
@@ -37,6 +53,12 @@ function TelaReceita({ navigation }) {
 
     if (!loaded) {
         return null
+    }
+    function atualizarCat(cat){
+        setCategoria(cat)
+    }
+    function atualizarData(data) {
+        setDataCalendario(data)
     }
 
     return (
@@ -74,8 +96,8 @@ function TelaReceita({ navigation }) {
             </View>
             <View style={styles.form}>
                 <View style={styles.componentesExprt}>
-                    <Calendario/>
-                    <Categoria/>
+                    <Calendario atualizarData={atualizarData}/>
+                    <Categoria atualizarCat={atualizarCat}/>
                 </View>
                 <Pressable onPress={()=>{adicionar()}} style={styles.btnAdicionar}><Text style={styles.txt20bk}>
                 ADICIONAR</Text></Pressable>

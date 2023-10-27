@@ -31,13 +31,7 @@ function MenuSup() {
                     style={styles.menuModal}
                 >
                     <View style={styles.menuConteudo}>
-                        <Pressable onPress={btnPerfil} style={styles.menuItem}><Text style={styles.txt16b}>Perfil</Text></Pressable>
-                    </View>
-                    <View style={styles.menuConteudo}>
                         <Pressable onPress={btnSair} style={styles.menuItem}><Text style={styles.txt16b}>Sair</Text></Pressable>
-                    </View>
-                    <View style={styles.menuConteudo}>
-                        <Pressable onPress={btnTermosDeUso} style={styles.menuItem}><Text style={styles.txt16b}>Termos de uso</Text></Pressable>
                     </View>
                 </Modal>
             </Portal>

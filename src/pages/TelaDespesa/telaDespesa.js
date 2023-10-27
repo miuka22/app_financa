@@ -1,12 +1,13 @@
 
-import { Text, View, TextInput, Image, StyleSheet, Pressable, useWindowDimensions } from "react-native"
+import { Text, View, Alert, StyleSheet, Pressable, useWindowDimensions } from "react-native"
 import { useFonts } from 'expo-font'
 import { BarraInferiorDespesa } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
 import { Calendario } from "../../Componente/Calendario"
-import { Categoria } from "../../Componente/Categoria"
-import { useState } from "react"
+import { Categoria, categoriaExportada } from "../../Componente/Categoria"
+import { useEffect, useState } from "react"
 import CurrencyInput from 'react-native-currency-input';
+import { api } from '../../api'
 
 function TelaDespesas({ navigation }) {
     const [loaded] = useFonts({
@@ -16,36 +17,58 @@ function TelaDespesas({ navigation }) {
         SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
     const {height, width} = useWindowDimensions();
+
+    // useEffect( () => {
+    //     api.get('/cadastrar/dinheiroconta')
+    // })
+    
     const adicionar = () => {
-        navigation.navigate('TelaPrincipal')
-    }
-    const urlDev = "http://localhost:3000"
-    const urlProduct = "https://api-backend-bd-tarde.onrender.com"
-    
-    
-    const [valorD,setValue]=useState("")
-    ///const [value, setValue] = useState('');
-    //const [categoria, setCategoria] = useState("");
-    console.log(valorD)
+            setCategoria(categoriaExportada())
+        console.log('categoria');
+        console.log(categoriaExportada());
+        console.log(categoria);
+        console.log('dataCalendario');
+        console.log(dataCalendario);
 
-    //console.log(categoria)
-
-    const load = async () => {
-        const result = await fetch(`${urlProduct}/despesas`,
-          {
-            method: "POST",
-            headers: {
-            valorDespesas: valorD,
-           /// categoria: categoria
-            },
-          }
-    
-        ).then(res => res)
-        const despesasResult = await result.json()
-        console.log('despesasResult',despesasResult)
+        if (categoria == 'categoria'|| valorDinheiro == 0 || valorDinheiro == null) {
+            Alert.alert('Money Mind', 'Insira valores válidos', [
+                {text: 'OK'},
+              ]);
+        } else {
+            console.log('chegou em else')
+            cadastrarDespesa()
         }
+
+        async function cadastrarDespesa() {
+            const response = await api.post('cadastrar/dinheiroconta/',{
+                data: dataCalendario,
+                categoria: categoria,
+                valor: -valorDinheiro,
+                tipo: 'despesa'
+            })
+            console.log(response.status)
+            navigation.navigate('TelaPrincipal')
+        }
+        
+        // console.log(`VALOR: ${valorDinheiro}`)
+        // console.log(`DATA: ${dataCalendario}`)
+        // console.log(`CATEGORIA: ${categoria}`)
+        console.log(`=====================`)
+    }
+    
+    const [valorDinheiro,setValorDinheiro]=useState("")
+    const [dataCalendario, setDataCalendario] = useState('');
+    const [categoria, setCategoria] = useState("");
+
     if (!loaded) {
+        console.log(dataCalendario);
         return null
+    }
+    function atualizarCat(cat){
+        setCategoria(cat)
+    }
+    function atualizarData(data) {
+        setDataCalendario(data)
     }
 
     return (
@@ -70,8 +93,10 @@ function TelaDespesas({ navigation }) {
                         <Text style={styles.txt28sb}>R$ </Text>
                         <CurrencyInput
                             style={styles.txt28sb}
-                            value={valorD}
-                            onChangeValue={setValue}
+                            value={valorDinheiro}
+                            onChangeValue={
+                                setValorDinheiro
+                            }
                             delimiter="."
                             separator=","
                             minValue={0}
@@ -83,10 +108,10 @@ function TelaDespesas({ navigation }) {
             </View>
             <View style={styles.form}>
                 <View style={styles.componentesExprt}>
-                    <Calendario/>
-                    <Categoria/>
+                    <Calendario atualizarData={atualizarData}/>
+                    <Categoria atualizarCat={atualizarCat}/>
                 </View>
-                <Pressable onPress={()=>load} style={styles.btnAdicionar}><Text style={styles.txt20bk}>
+                <Pressable onPress={()=>{adicionar()}} style={styles.btnAdicionar}><Text style={styles.txt20bk}>
                 ADICIONAR</Text></Pressable>
             </View>
             <BarraInferiorDespesa/>

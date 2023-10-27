@@ -3,14 +3,14 @@ import { Text, View, Image, StyleSheet, FlatList, Animated } from "react-native"
 import { useFonts } from 'expo-font'
 import { BarraInferiorPrincipal } from '../../Componente/BarraInferior'
 import { MenuSup } from '../../Componente/Menu'
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect, useState, useCallback } from "react"
+import { api } from '../../api'
 import { List, Avatar } from 'react-native-paper';
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useFocusEffect, useNavigation } from "@react-navigation/native"
 
 function TelaPrincipal({ navigation }) {
     const [dadosUsuarios, setDadosUsuarios] = useState('')
-    console.log('opa' + dadosUsuarios)
     const [loaded] = useFonts({
         SourceSansProBlack: require('../../../assets/fonts/SourceSansPro-Black.ttf'),
         SourceSansProBold: require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
@@ -21,18 +21,41 @@ function TelaPrincipal({ navigation }) {
     const userData = Object.values(historico)
     const [valorTotal, setValorTotal] = useState(0)
 
-    useEffect(() => {
-        (async () => {
-            const userData = await AsyncStorage.getItem("userData")
-            setDadosUsuarios(JSON.parse(userData))
-            const { data } = await axios.get('https://api-backend-bd-tarde.onrender.com/despesas/').then((res) => res)
+    const [recarregar, setRecarregar] = useState(false)
+    const recarregarTela = () => {
+        setRecarregar(true)
 
-            console.log(data.length)
-            const acumulador = data.reduce((total, despesa) => total - despesa.valorDespesas, 0)
-            setValorTotal(acumulador)
-            setHistorico(data)
-        })()
+        setTimeout(() => {
+            setRecarregar(false)
+        }, 1000)
+    }
+
+    const nav = useNavigation()
+    nav.addListener('focus', () => {
+        puxarDados()
+    })
+
+    async function puxarDados() {
+        const userData = await AsyncStorage.getItem("userData")
+                setDadosUsuarios(JSON.parse(userData))
+                const { data } = await api.get('usuarios/conta/').then((res) => res)
+                const acumulador = data.reduce((total, valor) => total + valor.valor, 0)
+                setValorTotal(acumulador)
+                setHistorico(data)
+    }
+
+    useEffect(() => {  
+        // nav.addListener('focus', () => {
+        //     console.log('OPA');
+        // })
+            (async () => {
+                puxarDados()
+            })()
     }, [])
+
+    const nomeCompleto = dadosUsuarios.userData?.nome
+    const nomeSeparado = () => nomeCompleto == null? 'carreegando...': nomeCompleto.split(' ')[0]
+
     if (!loaded) {
         return null
     }
@@ -47,7 +70,7 @@ function TelaPrincipal({ navigation }) {
                             style={styles.iconPerfil}
                         ></Image>
                         <Text style={styles.txt24sb}>
-                            Olá, {dadosUsuarios.userData?.nome}
+                            Olá {nomeSeparado()}
                         </Text>
                     </View>
                     <MenuSup />
@@ -57,7 +80,7 @@ function TelaPrincipal({ navigation }) {
                         Saldo em conta
                     </Text>
                     <Text style={styles.txt28sb}>
-                        R$: {valorTotal}
+                        R$: {valorTotal.toFixed(2)}
                     </Text>
                 </View>
             </View>
@@ -70,9 +93,10 @@ function TelaPrincipal({ navigation }) {
                         <FlatList
                             data={userData}
                             renderItem={({ item }) => <Item
-                                data={item.dataDespesa}
+                                data={item.data}
                                 categoria={item.categoria}
-                                valor={item.valorDespesas}
+                                valor={item.valor}
+                                tipo={item.tipo}
                             />}
                         />
                     </View>
@@ -83,7 +107,7 @@ function TelaPrincipal({ navigation }) {
     )
 }
 
-const Item = ({ valor, categoria, data }) => (
+const Item = ({ valor, categoria, data, tipo }) => (
     <View style={styles.listaConteiner}><List.Item
         style={styles.lista}
         titleStyle={styles.dataLista}
@@ -91,19 +115,33 @@ const Item = ({ valor, categoria, data }) => (
         descriptionStyle={styles.descricaoLista}
         description={categoria}
 
-        left={() => <Avatar.Image
-            size={30}
-            source={require('../../../assets/despesa.png')}
+        left={ tipo == 'receita'?
+        () => <Avatar.Image
+            size={30} 
+            source={require('../../../assets/receita.png')}
             style={styles.avatarDespesa}
-        />}
+        />
+        :() => <Avatar.Image
+        size={30} 
+        source={require('../../../assets/despesa.png')}
+        style={styles.avatarDespesa}
+    />}
 
-        right={() => <Text style={styles.valorLista}>R$ -{valor}</Text>}
+        right={ tipo == 'receita'?
+            () => <Text style={styles.valorListaReceita}>R$ {valor.toFixed(2)}</Text>
+        :() => <Text style={styles.valorListaDespesa}>R$ {valor.toFixed(2)}</Text>}
     /></View>
 );
 
+
 const styles = StyleSheet.create({
-    valorLista: {
+    valorListaDespesa: {
         color: '#DD0000',
+        fontSize: 20,
+        fontFamily: 'SourceSansProSemiBold',
+    },
+    valorListaReceita: {
+        color: '#007700',
         fontSize: 20,
         fontFamily: 'SourceSansProSemiBold',
     },
