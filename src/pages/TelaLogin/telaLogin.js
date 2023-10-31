@@ -20,7 +20,7 @@ function TelaLogin({ navigation }) {
     })
     console.log(response.data)
     if (response.data.retorno == 'correto') {
-      navigation.navigate('TelaPrincipal')
+      navigation.navigate('TelaPrincipal') 
       await AsyncStorage.setItem("userData", JSON.stringify(response.data))
       setAviso('')
     } else {

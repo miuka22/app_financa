@@ -20,7 +20,7 @@ function Categoria({atualizarCat}) {
         setCatSelecionada('Valor Variavel')
         fecharModal()
     }
-    const [catSelecionada, setCatSelecionada] = useState('Categoria')
+    const [catSelecionada, setCatSelecionada] = useState('Valor Variavel ')
     useEffect(() => {
         atualizarCat(catSelecionada)
     },[catSelecionada])

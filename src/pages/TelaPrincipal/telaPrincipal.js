@@ -21,27 +21,20 @@ function TelaPrincipal({ navigation }) {
     const userData = Object.values(historico)
     const [valorTotal, setValorTotal] = useState(0)
 
-    const [recarregar, setRecarregar] = useState(false)
-    const recarregarTela = () => {
-        setRecarregar(true)
-
-        setTimeout(() => {
-            setRecarregar(false)
-        }, 1000)
-    }
-
     const nav = useNavigation()
     nav.addListener('focus', () => {
         puxarDados()
     })
 
+    
     async function puxarDados() {
         const userData = await AsyncStorage.getItem("userData")
-                setDadosUsuarios(JSON.parse(userData))
-                const { data } = await api.get('usuarios/conta/').then((res) => res)
-                const acumulador = data.reduce((total, valor) => total + valor.valor, 0)
-                setValorTotal(acumulador)
-                setHistorico(data)
+        setDadosUsuarios(JSON.parse(userData))
+        const { data } = await api.get(`usuarios/${idUsuario}/conta/`).then((res) => res)
+        const acumulador = data.reduce((total, valor) => total + valor.valor, 0)
+        setValorTotal(acumulador)
+        setHistorico(data)
+        const idUsuario = dadosUsuarios?.userData.id
     }
 
     useEffect(() => {  
@@ -53,8 +46,8 @@ function TelaPrincipal({ navigation }) {
             })()
     }, [])
 
-    const nomeCompleto = dadosUsuarios.userData?.nome
-    const nomeSeparado = () => nomeCompleto == null? 'carreegando...': nomeCompleto.split(' ')[0]
+    // const nomeCompleto = dadosUsuarios.userData?.nome
+    const nomeSeparado = () => dadosUsuarios.userData?.nome == null? 'carreegando...': dadosUsuarios.userData?.nome.split(' ')[0]
 
     if (!loaded) {
         return null

@@ -7,6 +7,7 @@ import { Calendario } from "../../Componente/Calendario"
 import { Categoria, categoriaExportada } from "../../Componente/Categoria"
 import { useEffect, useState } from "react"
 import CurrencyInput from 'react-native-currency-input';
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { api } from '../../api'
 
 function TelaDespesas({ navigation }) {
@@ -17,10 +18,19 @@ function TelaDespesas({ navigation }) {
         SourceSansProRegular: require('../../../assets/fonts/SourceSansPro-Regular.ttf')
     })
     const {height, width} = useWindowDimensions();
+    const [dadosUsuarios, setDadosUsuarios] = useState('')
 
-    // useEffect( () => {
-    //     api.get('/cadastrar/dinheiroconta')
-    // })
+    async function puxarDados() {
+        const userData = await AsyncStorage.getItem("userData")
+        setDadosUsuarios(JSON.parse(userData))
+        console.log(dadosUsuarios.userData.id)
+    }
+            
+    useEffect(() => {  
+            (async () => {
+                puxarDados()
+            })()
+    }, [dadosUsuarios])
     
     const adicionar = () => {
             setCategoria(categoriaExportada())
@@ -44,7 +54,8 @@ function TelaDespesas({ navigation }) {
                 data: dataCalendario,
                 categoria: categoria,
                 valor: -valorDinheiro,
-                tipo: 'despesa'
+                tipo: 'despesa',
+                userId: dadosUsuarios.userData.id
             })
             console.log(response.status)
             navigation.navigate('TelaPrincipal')
